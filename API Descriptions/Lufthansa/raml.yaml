@@ -1,0 +1,683 @@
+#%RAML 1.0
+title: "LH Public"
+version: "1.0"
+protocols:
+- "HTTPS"
+baseUri: "https://api.lufthansa.com/v1"
+mediaType:
+- "application/json"
+types:
+  Airport:
+    type: "object"
+    description: "Array of all available airports or one airport matching the request."
+    properties:
+      AirportCode:
+        type: "string"
+        description: "3-letter IATA airport code, e.g. “TXL”."
+        required: false
+      CityCode:
+        type: "string"
+        description: "3-letter IATA city code, e.g. “BER”."
+        required: false
+      CountryCode:
+        type: "string"
+        description: "2-letter ISO 3166-1 country code, e.g. “DE”."
+        required: false
+      LocationType:
+        type: "string"
+        description: " “Airport”, “RailwayStation” or “BusStation”."
+        required: false
+      Names:
+        type: "object"
+        description: "Container for airport names."
+        required: false
+        properties:
+          Name:
+            type: "array"
+            description: "Array: language specific full name of airport."
+            required: false
+            items:
+              type: "Name"
+      Position:
+        type: "object"
+        description: "Physical location of an airport. This data section is optional\
+          \ and therefore not always present."
+        required: false
+        properties:
+          Coordinate:
+            type: "Coordinate"
+            required: false
+      TimeZoneId:
+        type: "string"
+        description: "Time zone name airport is in"
+        required: false
+      UtcOffset:
+        type: "number"
+        format: "float"
+        description: "Hour offset of airport to UTC time zone"
+        required: false
+  AirportResource:
+    type: "object"
+    description: "Root element of airport response."
+    properties:
+      Airports:
+        type: "object"
+        description: "Container for airport elements."
+        required: false
+        properties:
+          Airport:
+            type: "Airport"
+            required: false
+      Meta:
+        type: "object"
+        description: "Container for meta links."
+        required: false
+        properties:
+          '@Version':
+            type: "string"
+            required: false
+          Link:
+            type: "array"
+            description: "Array: links to resource itself and other related resources."
+            required: false
+            items:
+              type: "Link"
+          TotalCount:
+            type: "integer"
+            format: "int32"
+            required: false
+  AirportResponse:
+    type: "object"
+    properties:
+      AirportResource:
+        type: "AirportResource"
+        required: false
+  Coordinate:
+    type: "object"
+    description: "Container for coordinates."
+    properties:
+      Latitude:
+        type: "number"
+        format: "float"
+        description: "Decimal latitude. Range: -90 (South Pole) to +90 (North Pole),\
+          \ e.g. “51.540”."
+        required: false
+      Longitude:
+        type: "number"
+        format: "float"
+        description: "Decimal longitude. Range: -180 (West of Prime Meridian) to +180\
+          \ (East of Prime Meridian)."
+        required: false
+  Link:
+    type: "object"
+    properties:
+      '@Href':
+        type: "string"
+        description: "Link to actual a resource."
+        required: false
+      '@Rel':
+        type: "string"
+        description: "Specifying kind of link such as ‘self’ (link that returned this\
+          \ response), ‘alternate’ (link that points to another resource) or ‘related’\
+          \ (link that points to related resource)."
+        required: false
+  Name:
+    type: "object"
+    description: "2-letter ISO 639-1 language code for the corresponding item."
+    properties:
+      $:
+        type: "string"
+        required: false
+      '@LanguageCode':
+        type: "string"
+        required: false
+securitySchemes:
+  auth:
+    type: "OAuth 2.0"
+    settings:
+      authorizationUri: "https://api.lufthansa.com/v1/oauth/token"
+      accessTokenUri: "https://api.lufthansa.com/v1/oauth/token"
+      authorizationGrants:
+      - "authorization_code"
+      scopes:
+      - "read:LH Open API"
+/cargo/getRoute/{origin}-{destination}/{fromDate}/{productCode}:
+  uriParameters:
+    origin:
+      type: "string"
+      description: "Departure Airport : 3-letter IATA airport code, e.g. FRA."
+    destination:
+      type: "string"
+      description: "Arrival airport : 3-letter IATA airport code, e.g. HKG."
+    fromDate:
+      type: "string"
+      description: "Departure date in the local time of the departure airport. Based\
+        \ on LAT (Latest Acceptance Time). format : yyyy-MM-dd eg : 2017-07-15"
+    productCode:
+      type: "string"
+      description: "Product code for requested service and specials : 3-letter eg:\
+        \ YNZ"
+      enum:
+      - "FAN"
+      - "FCO"
+      - "FCP"
+      - "FDG"
+      - "FTF"
+      - "FUN"
+      - "FWN"
+      - "YCO"
+      - "YCP"
+      - "YDG"
+      - "YNB"
+      - "YNZ"
+      - "YTF"
+      - "YUN"
+      - "ZXB"
+      - "ZXF"
+      - "ZXR"
+  get:
+    displayName: "Retrieve all flights"
+    description: "Retrieve a list of all possible flights (both direct and connecting)\
+      \ between two airports on a given date. Routes are available for today and up\
+      \ to days in the future."
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/cargo/shipmentTracking/{aWBPrefix}-{aWBNumber}:
+  uriParameters:
+    aWBPrefix:
+      type: "string"
+      description: "aWBPrefix : Represents the airline that is the owner of this AWB,\
+        \ i.e. \"020\" = Lufthansa Cargo, format : [0-9]{3} e.g. 020"
+    aWBNumber:
+      type: "string"
+      description: "aWBNumber : The Air Waybill Number , format : [0-9]{8} e.g. 08002050"
+  get:
+    displayName: "Shipment Tracking"
+    description: "With this tracking service you can easily retrieve your shipment\
+      \ or flight status information."
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/offers/lounges/{location}:
+  uriParameters:
+    location:
+      type: "string"
+      description: "3-leter IATA airport or city code (e.g. 'ZRH')"
+  get:
+    displayName: "Lounges"
+    description: "Lounge information"
+    queryParameters:
+      cabinClass:
+        type: "string"
+        description: "Cabin class: 'M', 'E', 'C', 'F' (Acceptable values are: \"\"\
+          , \"M\", \"E\", \"C\", \"F\")"
+        required: false
+      tierCode:
+        type: "string"
+        description: "Frequent flyer level ('FTL', 'SGC', 'SEN', 'HON') (Acceptable\
+          \ values are: \"\", \"FTL\", \"SGC\", \"SEN\", \"HON\")"
+        required: false
+      lang:
+        type: "string"
+        description: "Language code."
+        required: false
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/offers/seatmaps/{flightNumber}/{origin}/{destination}/{date}/{cabinClass}:
+  uriParameters:
+    flightNumber:
+      type: "string"
+      description: "Flight number including carrier code and any suffix (e.g. 'LH2037')"
+    origin:
+      type: "string"
+      description: "Departure airport. 3-letter IATA airport code (e.g. 'TXL')"
+    destination:
+      type: "string"
+      description: "Destination airport. 3-letter IATA airport code (e.g. 'MUC')"
+    date:
+      type: "string"
+      description: "Departure date (YYYY-MM-DD)"
+    cabinClass:
+      type: "string"
+      description: "Cabin class: 'M', 'E', 'C', 'F'. Some flights have fewer classes\
+        \ (Acceptable values are: \"M\", \"E\", \"C\", \"F\")"
+  get:
+    displayName: "Seat Maps"
+    description: "Cabin layout and seat characteristics."
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/operations/flightstatus/arrivals/{airportCode}/{fromDateTime}:
+  uriParameters:
+    airportCode:
+      type: "string"
+      description: "3-letter IATA aiport code (e.g. 'ZRH')"
+    fromDateTime:
+      type: "string"
+      description: "Start of time range in local time of arrival airport (YYYY-MM-DDTHH:mm)"
+  get:
+    displayName: "Flight Status at Arrival Airport"
+    description: "Status of all arrivals at a given airport up to 4 hours from the\
+      \ provided date time."
+    queryParameters:
+      limit:
+        type: "string"
+        description: "Number of records returned per request. Defaults to 20, maximum\
+          \ is 100 (if a value bigger than 100 is given, 100 will be taken)"
+        required: false
+      offset:
+        type: "string"
+        description: "Number of records skipped. Defaults to 0"
+        required: false
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/operations/flightstatus/departures/{airportCode}/{fromDateTime}:
+  uriParameters:
+    airportCode:
+      type: "string"
+      description: "Departure airport. 3-letter IATA airport code (e.g. 'HAM')"
+    fromDateTime:
+      type: "string"
+      description: "Start of time range in local time of departure airport (YYYY-MM-DDTHH:mm)"
+  get:
+    displayName: "Flight Status at Departure Airport"
+    description: "Status of all departures from a given airport up to 4 hours from\
+      \ the provided date time."
+    queryParameters:
+      limit:
+        type: "string"
+        description: "Number of records returned per request. Defaults to 20, maximum\
+          \ is 100 (if a value bigger than 100 is given, 100 will be taken)"
+        required: false
+      offset:
+        type: "string"
+        description: "Number of records skipped. Defaults to 0"
+        required: false
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/operations/flightstatus/route/{origin}/{destination}/{date}:
+  uriParameters:
+    origin:
+      type: "string"
+      description: "3-letter IATA airport (e.g. 'FRA')"
+    destination:
+      type: "string"
+      description: "3-letter IATA airport code (e.g. 'JFK')"
+    date:
+      type: "string"
+      description: "Departure date (YYYY-MM-DD) in local time of departure airport"
+  get:
+    displayName: "Flight Status by Route"
+    description: "Status of flights between a given origin and destination on a given\
+      \ date."
+    queryParameters:
+      limit:
+        type: "string"
+        description: "Number of records returned per request. Defaults to 20, maximum\
+          \ is 100 (if a value bigger than 100 is given, 100 will be taken)"
+        required: false
+      offset:
+        type: "string"
+        description: "Number of records skipped. Defaults to 0"
+        required: false
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/operations/flightstatus/{flightNumber}/{date}:
+  uriParameters:
+    flightNumber:
+      type: "string"
+      description: "Flight number including carrier code and any suffix (e.g. 'LH400')"
+    date:
+      type: "string"
+      description: "The departure date (YYYY-MM-DD) in the local time of the departure\
+        \ airport"
+  get:
+    displayName: "Flight Status"
+    description: "Status of a particular flight (boarding, delayed, etc.)."
+    queryParameters:
+      limit:
+        type: "string"
+        description: "Number of records returned per request. Defaults to 20, maximum\
+          \ is 100 (if a value bigger than 100 is given, 100 will be taken)"
+        required: false
+      offset:
+        type: "string"
+        description: "Number of records skipped. Defaults to 0"
+        required: false
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/operations/schedules/{origin}/{destination}/{fromDateTime}:
+  uriParameters:
+    origin:
+      type: "string"
+      description: "Departure airport. 3-letter IATA airport code (e.g. 'ZRH')"
+    destination:
+      type: "string"
+      description: "Destination airport. 3-letter IATA airport code (e.g. 'FRA')"
+    fromDateTime:
+      type: "string"
+      description: "Local departure date and optionally departure time (YYYY-MM-DD\
+        \ or YYYY-MM-DDTHH:mm). When not provided, time is assumed to be 00:01"
+  get:
+    displayName: "Flight Schedules"
+    description: "Scheduled flights between given airports on a given date."
+    queryParameters:
+      directFlights:
+        type: "boolean"
+        description: "Show only direct flights (false=0, true=1). Default is false"
+        required: false
+      limit:
+        type: "string"
+        description: "Number of records returned per request. Defaults to 20, maximum\
+          \ is 100 (if a value bigger than 100 is given, 100 will be taken)"
+        required: false
+      offset:
+        type: "string"
+        description: "Number of records skipped. Defaults to 0"
+        required: false
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/references/aircraft/{aircraftCode}:
+  uriParameters:
+    aircraftCode:
+      type: "string"
+      description: "3-character IATA aircraft code"
+      default: "33P"
+  get:
+    displayName: "Aircraft"
+    description: "List all aircraft types or one specific aircraft type."
+    queryParameters:
+      limit:
+        type: "string"
+        description: "Number of records returned per request. Defaults to 20, maximum\
+          \ is 100 (if a value bigger than 100 is given, 100 will be taken)"
+        default: "20"
+        required: false
+      offset:
+        type: "string"
+        description: "Number of records skipped. Defaults to 0"
+        default: "0"
+        required: false
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/references/airlines/{airlineCode}:
+  uriParameters:
+    airlineCode:
+      type: "string"
+      description: "2-character IATA airline/carrier code"
+      default: "LH"
+  get:
+    displayName: "Airlines"
+    description: "List all airlines or one specific airline."
+    queryParameters:
+      limit:
+        type: "string"
+        description: "Number of records returned per request. Defaults to 20, maximum\
+          \ is 100 (if a value bigger than 100 is given, 100 will be taken)"
+        default: "20"
+        required: false
+      offset:
+        type: "string"
+        description: "Number of records skipped. Defaults to 0"
+        default: "0"
+        required: false
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/references/airports/nearest/{latitude},{longitude}:
+  uriParameters:
+    latitude:
+      type: "integer"
+      format: "int32"
+      description: "Latitude in decimal format to at most 3 decimal places"
+    longitude:
+      type: "integer"
+      format: "int32"
+      description: "Longitude in decimal format to at most 3 decimal places"
+  get:
+    displayName: "Nearest Airports"
+    description: "List the 5 closest airports to the given latitude and longitude,\
+      \ irrespective of the radius of the reference point."
+    queryParameters:
+      lang:
+        type: "string"
+        description: "2 letter ISO 3166-1 language code"
+        required: false
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/references/airports/{airportCode}:
+  uriParameters:
+    airportCode:
+      type: "string"
+      description: "3-letter IATA airport code"
+      default: "TXL"
+  get:
+    displayName: "Airports"
+    description: "List all airports or one specific airport. All airports response\
+      \ is very large. It is possible to request the response in a specific language."
+    queryParameters:
+      lang:
+        type: "string"
+        description: "2-letter ISO 3166-1 language code"
+        required: false
+      limit:
+        type: "string"
+        description: "Number of records returned per request. Defaults to 20, maximum\
+          \ is 100 (if a value bigger than 100 is given, 100 will be taken)"
+        default: "20"
+        required: false
+      offset:
+        type: "string"
+        description: "Number of records skipped. Defaults to 0"
+        default: "0"
+        required: false
+      LHoperated:
+        type: "boolean"
+        description: "Restrict the results to locations with flights operated by LH\
+          \ (false=0, true=1)"
+        required: false
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "AirportResponse"
+    securedBy:
+    - "auth"
+/references/cities/{cityCode}:
+  uriParameters:
+    cityCode:
+      type: "string"
+      description: "3-letter IATA city code"
+      default: "BER"
+  get:
+    displayName: "Cities"
+    description: "List all cities or one specific city. It is possible to request\
+      \ the response in a specific language."
+    queryParameters:
+      lang:
+        type: "string"
+        description: "2 letter ISO 3166-1 language code"
+        required: false
+      limit:
+        type: "string"
+        description: "Number of records returned per request. Defaults to 20, maximum\
+          \ is 100 (if a value bigger than 100 is given, 100 will be taken)"
+        default: "20"
+        required: false
+      offset:
+        type: "string"
+        description: "Number of records skipped. Defaults to 0"
+        default: "0"
+        required: false
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"
+/references/countries/{countryCode}:
+  uriParameters:
+    countryCode:
+      type: "string"
+      description: "2-letter ISO 3166-1 country code"
+      default: "DK"
+  get:
+    displayName: "Countries"
+    description: "List all countries or one specific country. It is possible to request\
+      \ the response in a specific language."
+    queryParameters:
+      lang:
+        type: "string"
+        description: "2 letter ISO 3166-1 language code"
+        required: false
+      limit:
+        type: "string"
+        description: "Number of records returned per request. Defaults to 20, maximum\
+          \ is 100 (if a value bigger than 100 is given, 100 will be taken)"
+        default: "20"
+        required: false
+      offset:
+        type: "string"
+        description: "Number of records skipped. Defaults to 0"
+        default: "0"
+        required: false
+    headers:
+      Accept:
+        type: "string"
+        description: "http header: application/json or application/xml (Acceptable\
+          \ values are: \"application/json\", \"application/xml\")"
+    responses:
+      200:
+        description: ""
+        body:
+          type: "object"
+    securedBy:
+    - "auth"

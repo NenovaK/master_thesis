@@ -1,0 +1,1552 @@
+#%RAML 1.0
+title: "uebermaps API endpoints"
+description: "Enable people to store spots on public and private maps"
+version: "2.0"
+protocols:
+- "HTTPS"
+baseUri: "https://uebermaps.com/api/v2"
+mediaType:
+- "application/json"
+types:
+  Attachment:
+    type: "object"
+    properties:
+      attachable_id:
+        type: "integer"
+        required: false
+        example: 7543829
+      attachable_type:
+        type: "string"
+        required: false
+        example: "Spot"
+      created_at:
+        type: "datetime"
+        required: false
+      description:
+        type: "string"
+        required: false
+        example: "This photo was taken in front of the restaurant"
+      file_url:
+        type: "string"
+        required: false
+        example: "https://..."
+      id:
+        type: "integer"
+        required: false
+        example: 34939432
+      map_id:
+        type: "integer"
+        required: false
+        example: 985732
+      sizes:
+        type: "object"
+        required: false
+        example:
+          value:
+            large:
+              h: 860
+              w: 1024
+          strict: false
+      spot:
+        type: "Spot"
+        required: false
+      status:
+        type: "string"
+        enum:
+        - "approved"
+        - "unapproved"
+        required: false
+        example: "approved"
+      user:
+        type: "User"
+        required: false
+  Collaborator:
+    type: "object"
+    properties:
+      created_at:
+        type: "datetime"
+        required: false
+      group:
+        type: "string"
+        enum:
+        - "admin"
+        - "editor"
+        required: false
+        example: "editor"
+      id:
+        type: "integer"
+        required: false
+        example: 4829504
+      is_admin:
+        type: "boolean"
+        required: false
+        example: false
+      map:
+        type: "Map"
+        required: false
+      map_id:
+        type: "integer"
+        required: false
+        example: 324894
+      updated_at:
+        type: "datetime"
+        required: false
+      user:
+        type: "User"
+        required: false
+      user_id:
+        type: "integer"
+        required: false
+        example: 649302
+  CollaboratorEditable:
+    type: "object"
+    properties:
+      group:
+        type: "string"
+        enum:
+        - "admin"
+        - "editor"
+        required: false
+        example: "editor"
+  CollaboratorInvitation:
+    type: "object"
+    properties:
+      accepted:
+        type: "boolean"
+        required: false
+        example: true
+      created_at:
+        type: "datetime"
+        required: false
+      email:
+        type: "string"
+        required: false
+        example: "a@b.com"
+      group:
+        type: "string"
+        enum:
+        - "admin"
+        - "editor"
+        required: false
+        example: "editor"
+      id:
+        type: "integer"
+        required: false
+        example: 8696493
+      invited_by_user:
+        type: "User"
+        required: false
+      map:
+        type: "Map"
+        required: false
+      sent:
+        type: "boolean"
+        required: false
+        example: true
+      updated_at:
+        type: "datetime"
+        required: false
+      user:
+        type: "User"
+        required: false
+  CollaboratorInvitationCreate:
+    type: "object"
+    properties:
+      emails:
+        type: "string"
+        required: false
+        example: "a@b.com, c@d.com, e@f.com"
+      is_admin:
+        type: "boolean"
+        required: false
+        example: true
+      map_id:
+        type: "integer"
+        required: false
+        example: 34925783
+      user_ids:
+        type: "string"
+        required: false
+        example: "5839459, 389423, 89494, 686950"
+  Comment:
+    type: "object"
+    properties:
+      body:
+        type: "string"
+        required: false
+        example: "Nice photo"
+      created_at:
+        type: "datetime"
+        required: false
+      id:
+        type: "integer"
+        required: false
+        example: 29628358
+      status:
+        type: "string"
+        enum:
+        - "approved"
+        - "unapproved"
+        required: false
+        example: "approved"
+      updated_at:
+        type: "datetime"
+        required: false
+      user:
+        type: "User"
+        required: false
+  CommentEditable:
+    type: "object"
+    properties:
+      body:
+        type: "string"
+        required: false
+        example: "Nice photo"
+  Event:
+    type: "object"
+    properties:
+      counts:
+        type: "EventCounts"
+        required: false
+      created_at:
+        type: "datetime"
+        required: false
+      description:
+        type: "string"
+        required: false
+        example: "Very special event"
+      ends_at:
+        type: "datetime"
+        required: false
+      id:
+        type: "integer"
+        required: false
+        example: 482959
+      lat:
+        type: "number"
+        required: false
+        example: 53.293493
+      lon:
+        type: "number"
+        required: false
+        example: 12.394328
+      owner_id:
+        type: "integer"
+        required: false
+        example: 82389429
+      picture_url:
+        type: "string"
+        required: false
+        example: "https://..."
+      spot:
+        type: "Spot"
+        required: false
+      starts_at:
+        type: "datetime"
+        required: false
+      time_zone:
+        type: "string"
+        required: false
+        example: "Berlin"
+      title:
+        type: "string"
+        required: false
+        example: "20th anniversary event"
+      updated_at:
+        type: "datetime"
+        required: false
+      user:
+        type: "User"
+        required: false
+  EventCounts:
+    type: "object"
+    properties:
+      attachments:
+        type: "integer"
+        required: false
+        example: 27
+      comments:
+        type: "integer"
+        required: false
+        example: 284
+  EventEditable:
+    type: "object"
+    properties:
+      description:
+        type: "string"
+        required: false
+        example: "Very special event"
+      ends_at:
+        type: "datetime"
+        required: false
+      lat:
+        type: "number"
+        required: false
+        example: 53.293493
+      lon:
+        type: "number"
+        required: false
+        example: 12.394328
+      picture:
+        type: "string"
+        required: false
+        example: "<BASE_64_ENCODED_STRING>"
+      starts_at:
+        type: "datetime"
+        required: false
+      time_zone:
+        type: "string"
+        required: false
+        example: "Berlin"
+      title:
+        type: "string"
+        required: false
+        example: "20th anniversary event"
+      user_id:
+        type: "integer"
+        required: false
+        example: 703943
+  Map:
+    type: "object"
+    properties:
+      counts:
+        type: "MapCounts"
+        required: false
+      created_at:
+        type: "datetime"
+        required: false
+      description:
+        type: "string"
+        required: false
+        example: "A collection of restaurants, cafes, clubs and random spots that\
+          \ I recommend in Berlin"
+      id:
+        type: "integer"
+        required: false
+        example: 18234843
+      map_settings:
+        type: "MapSettings"
+        required: false
+      owner_id:
+        type: "integer"
+        required: false
+        example: 9829358
+      picture_url:
+        type: "string"
+        required: false
+        example: "https://..."
+      title:
+        type: "string"
+        required: false
+        example: "My favourite places in Berlin"
+      updated_at:
+        type: "datetime"
+        required: false
+      visibility:
+        type: "string"
+        enum:
+        - "public"
+        - "link"
+        - "private"
+        required: false
+        example: "public"
+  MapCounts:
+    type: "object"
+    properties:
+      attachments:
+        type: "integer"
+        required: false
+        example: 31
+      comments:
+        type: "integer"
+        required: false
+        example: 234
+      impressions:
+        type: "integer"
+        required: false
+        example: 234332
+      respots:
+        type: "integer"
+        required: false
+        example: 24
+      spots:
+        type: "integer"
+        required: false
+        example: 67
+      subscriptions:
+        type: "integer"
+        required: false
+        example: 3892
+  MapEditable:
+    type: "object"
+    properties:
+      description:
+        type: "string"
+        required: false
+        example: "A collection of restaurants, cafes, clubs and random spots that\
+          \ I recommend in Berlin"
+      map_settings:
+        type: "MapSettings"
+        required: false
+      picture:
+        type: "string"
+        required: false
+        example: "<BASE_64_ENCODED_STRING>"
+      title:
+        type: "string"
+        required: false
+        example: "My favourite places in Berlin"
+      visibility:
+        type: "string"
+        enum:
+        - "public"
+        - "link"
+        - "private"
+        required: false
+        example: "public"
+  MapRelation:
+    type: "object"
+    properties:
+      access:
+        type: "string"
+        required: false
+        example: ""
+      access_group:
+        type: "string"
+        enum:
+        - "visitor"
+        - "editor"
+        - "admin"
+        required: false
+        example:
+          value: "owner"
+          strict: false
+      subscribed:
+        type: "boolean"
+        required: false
+        example: true
+  MapSettings:
+    type: "object"
+    properties:
+      editor_access:
+        type: "string"
+        required: false
+        example: ""
+      respotting_to_this_map:
+        type: "boolean"
+        required: false
+        example: true
+      visitor_access:
+        type: "string"
+        required: false
+        example: ""
+  MapWithAuthToken:
+    type: "object"
+    properties:
+      counts:
+        type: "MapCounts"
+        required: false
+      created_at:
+        type: "datetime"
+        required: false
+      description:
+        type: "string"
+        required: false
+        example: "A collection of restaurants, cafes, clubs and random spots that\
+          \ I recommend in Berlin"
+      id:
+        type: "integer"
+        required: false
+        example: 18234843
+      owner_id:
+        type: "integer"
+        required: false
+        example: 9829358
+      picture_url:
+        type: "string"
+        required: false
+        example: "https://..."
+      title:
+        type: "string"
+        required: false
+        example: "My favourite places in Berlin"
+      token:
+        type: "string"
+        required: false
+        example: "1-x_gqu7eLBe3uKoAGAGXy"
+      updated_at:
+        type: "datetime"
+        required: false
+      visibility:
+        type: "string"
+        enum:
+        - "public"
+        - "link"
+        - "private"
+        required: false
+        example: "public"
+  MapWithRelation:
+    type: "object"
+    properties:
+      counts:
+        type: "MapCounts"
+        required: false
+      created_at:
+        type: "datetime"
+        required: false
+      description:
+        type: "string"
+        required: false
+        example: "A collection of restaurants, cafes, clubs and random spots that\
+          \ I recommend in Berlin"
+      id:
+        type: "integer"
+        required: false
+        example: 18234843
+      map_settings:
+        type: "MapSettings"
+        required: false
+      owner_id:
+        type: "integer"
+        required: false
+        example: 9829358
+      picture_url:
+        type: "string"
+        required: false
+        example: "https://..."
+      relation:
+        type: "MapRelation"
+        required: false
+      title:
+        type: "string"
+        required: false
+        example: "My favourite places in Berlin"
+      updated_at:
+        type: "datetime"
+        required: false
+      visibility:
+        type: "string"
+        enum:
+        - "public"
+        - "link"
+        - "private"
+        required: false
+        example: "public"
+  Respot:
+    type: "object"
+    properties:
+      created_at:
+        type: "datetime"
+        required: false
+      id:
+        type: "integer"
+        required: false
+        example: 589032
+      map:
+        type: "Map"
+        required: false
+      map_id:
+        type: "integer"
+        required: false
+        example: 8393450
+      spot:
+        type: "Spot"
+        required: false
+      updated_at:
+        type: "datetime"
+        required: false
+      user:
+        type: "User"
+        required: false
+  Spot:
+    type: "object"
+    properties:
+      counts:
+        type: "SpotCounts"
+        required: false
+      created_at:
+        type: "datetime"
+        required: false
+      description:
+        type: "string"
+        required: false
+        example: "Landed here by accident but look how wonderful this place is in\
+          \ the photos attached"
+      id:
+        type: "integer"
+        required: false
+        example: 5932234
+      lat:
+        type: "number"
+        required: false
+        example: 53.112385
+      lon:
+        type: "number"
+        required: false
+        example: 10.58349
+      map_id:
+        type: "integer"
+        required: false
+        example: 394805
+      picture_url:
+        type: "string"
+        required: false
+        example: "https://..."
+      status:
+        type: "string"
+        enum:
+        - "approved"
+        - "unapproved"
+        required: false
+        example: "approved"
+      time_zone:
+        type: "string"
+        required: false
+        example: "Berlin"
+      title:
+        type: "string"
+        required: false
+        example: "Beautiful place out in the country"
+      updated_at:
+        type: "datetime"
+        required: false
+      user:
+        type: "User"
+        required: false
+  SpotCounts:
+    type: "object"
+    properties:
+      attachments:
+        type: "integer"
+        required: false
+        example: 4
+      comments:
+        type: "integer"
+        required: false
+        example: 24
+      respot:
+        type: "integer"
+        required: false
+        example: 34
+  SpotEditable:
+    type: "object"
+    properties:
+      description:
+        type: "string"
+        required: false
+        example: "Landed here by accident but look how wonderful this place is in\
+          \ the photos attached"
+      lat:
+        type: "number"
+        required: false
+        example: 53.112385
+      lon:
+        type: "number"
+        required: false
+        example: 10.58349
+      picture:
+        type: "string"
+        required: false
+        example: "<BASE_64_ENCODED_STRING>"
+      time_zone:
+        type: "string"
+        required: false
+        example: "Berlin"
+      title:
+        type: "string"
+        required: false
+        example: "Beautiful place out in the country"
+  Subscription:
+    type: "object"
+    properties:
+      created_at:
+        type: "datetime"
+        required: false
+      id:
+        type: "integer"
+        required: false
+        example: 23950552
+      map:
+        type: "Map"
+        required: false
+      updated_at:
+        type: "datetime"
+        required: false
+      user:
+        type: "User"
+        required: false
+      user_id:
+        type: "integer"
+        required: false
+        example: 852002
+  User:
+    type: "object"
+    properties:
+      about:
+        type: "string"
+        required: false
+        example: "The comedian"
+      counts:
+        type: "object"
+        required: false
+        properties:
+          maps:
+            type: "integer"
+            required: false
+            example: 24
+      header_picture:
+        type: "string"
+        required: false
+        example: "https://..."
+      id:
+        type: "integer"
+        required: false
+        example: 5829035
+      location:
+        type: "string"
+        required: false
+        example: "Little Rock, Arkansas"
+      name:
+        type: "string"
+        required: false
+        example: "Bill Hicks"
+      picture_url:
+        type: "string"
+        required: false
+        example: "https://..."
+      screen_name:
+        type: "string"
+        required: false
+        example: "billhicks"
+      url:
+        type: "string"
+        required: false
+        example: "http://www.billhicks.com"
+  UserAuthentication:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+        required: false
+        example: "a@b.com"
+      password:
+        type: "string"
+        required: false
+        example: "••••••••"
+  UserEditable:
+    type: "object"
+    properties:
+      about:
+        type: "string"
+        required: false
+        example: "The comedian"
+      header:
+        type: "string"
+        required: false
+        example: "<BASE_64_ENCODED_STRING>"
+      language:
+        type: "string"
+        required: false
+        example: "en"
+      location:
+        type: "string"
+        required: false
+        example: "Little Rock, Arkansas"
+      name:
+        type: "string"
+        required: false
+        example: "Bill Hicks"
+      picture:
+        type: "string"
+        required: false
+        example: "<BASE_64_ENCODED_STRING>"
+      screen_name:
+        type: "string"
+        required: false
+        example: "billhicks"
+      time_zone:
+        type: "string"
+        required: false
+        example: "Pacific Time (US & Canada)"
+      url:
+        type: "string"
+        required: false
+        example: "http://www.billhicks.com"
+  UserFullProfile:
+    type: "object"
+/account:
+  patch:
+    displayName: "Update account"
+    description: "Update account. Wrap map parameters in [user]."
+    body:
+      type: "UserEditable"
+    responses:
+      200:
+        description: "Contains user data."
+        body:
+          type: "User"
+/attachments/{id}:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Attachment id"
+  delete:
+    displayName: "Delete attachment"
+    description: "Delete attachment."
+    responses:
+      200:
+        description: "Contains deleted attachment."
+        body:
+          type: "Attachment"
+/authentication:
+  post:
+    displayName: "Sign in user"
+    description: "Sign in user. Wrap authentication parameters in [user]."
+    body:
+      type: "UserAuthentication"
+    responses:
+      200:
+        description: "Contains user data including authentication token for subsequent\
+          \ requests"
+        body:
+          type: "UserFullProfile"
+/collaborator_invitations:
+  get:
+    displayName: "List your collaborator invitations"
+    description: "List your collaborator invitations."
+    responses:
+      200:
+        description: "Contains list of collaborator invitations."
+        body:
+          type: "array"
+          items:
+            type: "CollaboratorInvitation"
+  post:
+    displayName: "Invite user to collaborate on map"
+    description: "Invite user to collaborate on map."
+    body:
+      type: "CollaboratorInvitationCreate"
+    responses:
+      200:
+        description: "Contains collaborator invitation data."
+        body:
+          type: "CollaboratorInvitation"
+/collaborator_invitations/{id}:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Collaborator invitation id"
+  get:
+    displayName: "Show collaborator invitation"
+    description: "Show collaborator invitation"
+    responses:
+      200:
+        description: "Contains collaborator invitation data."
+        body:
+          type: "CollaboratorInvitation"
+  delete:
+    displayName: "Delete collaborator invitation"
+    description: "Delete collaborator invitation."
+    responses:
+      200:
+        description: "Contains deleted collaborator invitation."
+        body:
+          type: "CollaboratorInvitation"
+  patch:
+    displayName: "Accept collaborator invitation."
+    description: "Accept collaborator invitation."
+    responses:
+      200:
+        description: "Contains collaborator invitation data."
+        body:
+          type: "CollaboratorInvitation"
+/comments/{id}:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Comment id"
+  delete:
+    displayName: "Delete comment"
+    description: "Delete comment."
+    responses:
+      200:
+        description: "Contains deleted comment."
+        body:
+          type: "Comment"
+  patch:
+    displayName: "Update comment"
+    description: "Update comment. Wrap comment parameters in [comment]."
+    body:
+      type: "CommentEditable"
+    responses:
+      200:
+        description: "Contains comment data"
+        body:
+          type: "Comment"
+/events:
+  get:
+    displayName: "List your own events"
+    description: "List your own events."
+    queryParameters:
+      timeframe_start:
+        type: "string"
+        description: "Begin of time range of event (ISO 8601 date format)."
+        required: false
+      timeframe_end:
+        type: "string"
+        description: "End of time range of event (ISO 8601 date format)."
+        required: false
+      bounds:
+        type: "string"
+        description: "To refine your event index request to contain only events within\
+          \                                                             a geographical\
+          \ box pass the followng bounds parameters.                             \
+          \                                F. e. to get events within 'Hamburg, St.\
+          \ Pauli':                                                             bounds[sw_lat]=53.54831449741324\
+          \                                                             bounds[sw_lon]=9.943227767944336\
+          \                                                             bounds[ne_lat]=53.5571103674878\
+          \                                                             bounds[ne_lon]=9.9776029586792"
+        required: false
+    responses:
+      200:
+        description: "Contains list of events."
+        body:
+          type: "array"
+          items:
+            type: "Event"
+/events/{id}:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Id of event"
+  get:
+    displayName: "Get event"
+    description: "Get basic information about an event"
+    responses:
+      200:
+        description: "Contains event data."
+        body:
+          type: "Event"
+  delete:
+    displayName: "Delete event"
+    description: "Delete event."
+    responses:
+      200:
+        description: "Contains deleted event."
+        body:
+          type: "Event"
+  patch:
+    displayName: "Update event"
+    description: "Update event. Wrap event parameters in [event]."
+    body:
+      type: "EventEditable"
+    responses:
+      200:
+        description: "Contains map data, map settings and your relation to this map"
+        body:
+          type: "Map"
+/maps:
+  get:
+    displayName: "List your own maps"
+    description: "List your own maps."
+    responses:
+      200:
+        description: "Contains list of maps."
+        body:
+          type: "array"
+          items:
+            type: "Map"
+  post:
+    displayName: "Create map"
+    description: "Create map. Wrap map parameters in [map]. To add a map header picture\
+      \ pass a base64 encoded string to [map][picture]."
+    body:
+      type: "MapEditable"
+    responses:
+      200:
+        description: "Contains map data, map settings and your relation to this map"
+        body:
+          type: "Map"
+/maps/search:
+  get:
+    displayName: "Search maps"
+    description: "Search maps"
+    queryParameters:
+      q:
+        type: "string"
+        description: "Query"
+        required: false
+      d:
+        type: "integer"
+        description: "Distance. Diameter of search radius in meter (default: 2000\
+          \ meter)"
+        required: false
+      lat:
+        type: "number"
+        description: "Latitude for search radius (default distance: 2000 meter)"
+        required: false
+      lon:
+        type: "number"
+        description: "Longitude for search radius (default distance: 2000 meter)"
+        required: false
+    responses:
+      200:
+        description: "Contains map data."
+        body:
+          type: "Map"
+/maps/{id}:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Id of map"
+  get:
+    displayName: "Get map"
+    description: "Get basic information about a map"
+    responses:
+      200:
+        description: "Contains map data, map settings and your relation to this map"
+        body:
+          type: "MapWithRelation"
+  delete:
+    displayName: "Delete map"
+    description: "Delete map."
+    responses:
+      200:
+        description: "Contains deleted map."
+        body:
+          type: "Map"
+  patch:
+    displayName: "Update map"
+    description: "Update map. Wrap map parameters in [map]. To update the map header\
+      \ picture pass a base64 encoded string to [map][picture]."
+    body:
+      type: "MapEditable"
+    responses:
+      200:
+        description: "Contains map data, map settings and your relation to this map"
+        body:
+          type: "Map"
+/maps/{id}/attachments:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Map id"
+  get:
+    displayName: "List attachments for a given map"
+    description: "List attachments for a given map."
+    responses:
+      200:
+        description: "Contains list of attachments."
+        body:
+          type: "array"
+          items:
+            type: "Attachment"
+  post:
+    displayName: "Upload map attachment"
+    description: "Upload map attachment. Wrap attachment parameters in [attachment]"
+    body:
+      type: "string"
+    responses:
+      200:
+        description: "Contains attachment data"
+        body:
+          type: "Attachment"
+/maps/{id}/collaborators/:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Map id"
+  get:
+    displayName: "List collaborators of a map"
+    description: "List collaborators of a map."
+    responses:
+      200:
+        description: "Contains list of collaborators."
+        body:
+          type: "array"
+          items:
+            type: "Collaborator"
+/maps/{id}/collaborators/{user_id}:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "map id"
+    user_id:
+      type: "integer"
+      description: "user id"
+  delete:
+    displayName: "Delete collaboration"
+    description: "Delete collaboration."
+    responses:
+      200:
+        description: "Contains deleted collaborator."
+        body:
+          type: "Collaborator"
+  patch:
+    displayName: "Update collaborator"
+    description: "Update collaborator. Wrap collaborator parameters in [collaborator]"
+    body:
+      type: "CollaboratorEditable"
+    responses:
+      200:
+        description: "Contains collaborator data"
+        body:
+          type: "Collaborator"
+/maps/{id}/comments:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Id of map"
+  get:
+    displayName: "List comments for a given map"
+    description: "List comments for a given map."
+    responses:
+      200:
+        description: "Contains list of comments."
+        body:
+          type: "array"
+          items:
+            type: "Comment"
+  post:
+    displayName: "Create map comment"
+    description: "Create map comment. Wrap comment parameters in [comment]."
+    body:
+      type: "CommentEditable"
+    responses:
+      200:
+        description: "Contains comment data"
+        body:
+          type: "Comment"
+/maps/{id}/respots:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Map Id"
+  get:
+    displayName: "List respots of a map"
+    description: "List respots of a map."
+    responses:
+      200:
+        description: "Contains list of respots."
+        body:
+          type: "array"
+          items:
+            type: "Respot"
+/maps/{id}/spots:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Id of map"
+  get:
+    displayName: "List spots for a given map"
+    description: "List spots for a given map."
+    queryParameters:
+      order:
+        type: "string"
+        description: "Order of spots"
+        enum:
+        - "created_at_asc"
+        - "created_at_desc"
+        - "updated_at_asc"
+        - "updated_at_desc"
+        - "title_asc"
+        - "title_desc"
+        required: false
+    responses:
+      200:
+        description: "Contains list of spots."
+        body:
+          type: "array"
+          items:
+            type: "Spot"
+  post:
+    displayName: "Create spot"
+    description: "Create spot. Wrap parameters in [spot]. To add a spot picture pass\
+      \ a base64 encoded string to [spot][picture]."
+    body:
+      type: "SpotEditable"
+    responses:
+      200:
+        description: "Contains spot data"
+        body:
+          type: "Spot"
+/maps/{id}/subscriptions:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Id of map"
+  get:
+    displayName: "List subscriptions for a given map"
+    description: "List subscriptions for a given map."
+    responses:
+      200:
+        description: "Contains list of subscriptions."
+        body:
+          type: "array"
+          items:
+            type: "Subscription"
+  delete:
+    displayName: "Unsubscribe from map"
+    description: "Unsubscribe from map."
+    responses:
+      200:
+        description: "Contains deleted subscription."
+        body:
+          type: "Subscription"
+/maps/{map_id}/spots/{id}:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Id of spot"
+    map_id:
+      type: "integer"
+      description: "Id of map"
+  get:
+    displayName: "Get spot"
+    description: "Get basic information about a spot"
+    responses:
+      200:
+        description: "Contains spot data"
+        body:
+          type: "Spot"
+/maps/{map_id}/spots/{spot_id}/respot:
+  uriParameters:
+    map_id:
+      type: "integer"
+      description: "Map Id"
+    spot_id:
+      type: "integer"
+      description: "Spot Id"
+  delete:
+    displayName: "Delete respot from map by spot id"
+    description: "Delete respot from map by spot id."
+    responses:
+      200:
+        description: "Contains deleted respot."
+        body:
+          type: "Respot"
+/respot_maps:
+  get:
+    displayName: "List maps that user can respot to"
+    description: "List maps that user can respot to."
+    responses:
+      200:
+        description: "Contains list of maps."
+        body:
+          type: "array"
+          items:
+            type: "Map"
+/respots/{id}:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Id of respot"
+  get:
+    displayName: "Get respot"
+    description: "Get basic information about a respot"
+    responses:
+      200:
+        description: "Contains respot data."
+        body:
+          type: "Respot"
+  delete:
+    displayName: "Delete respot"
+    description: "Delete respot."
+    responses:
+      200:
+        description: "Contains deleted respot."
+        body:
+          type: "Respot"
+/share/map/{id}:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Id of map"
+  get:
+    displayName: "Get secret access token to share map"
+    description: "Get secret access token of an uebermap with access set to 'Secret\
+      \ link'. Pass the 'token' on every request you make to access this uebermap\
+      \ and its resources. F.e. token=1-x_gqu7eLBe3uKoAGAGXy"
+    responses:
+      200:
+        description: "Contains map data and a secret token to access this map."
+        body:
+          type: "MapWithAuthToken"
+/spots:
+  get:
+    displayName: "List your own spots"
+    description: "List your own spots."
+    queryParameters:
+      order:
+        type: "string"
+        description: "Order of spots"
+        enum:
+        - "created_at_asc"
+        - "created_at_desc"
+        - "updated_at_asc"
+        - "updated_at_desc"
+        - "title_asc"
+        - "title_desc"
+        required: false
+    responses:
+      200:
+        description: "Contains list of spots."
+        body:
+          type: "array"
+          items:
+            type: "Spot"
+/spots/search:
+  get:
+    displayName: "Search spots"
+    description: "Search spots"
+    queryParameters:
+      q:
+        type: "string"
+        description: "Query"
+        required: false
+      d:
+        type: "integer"
+        description: "Distance. Diameter of search radius in meter (default: 2000\
+          \ meter)"
+        required: false
+      lat:
+        type: "number"
+        description: "Latitude for search radius (2 km)"
+        required: false
+      lon:
+        type: "number"
+        description: "Longitude for search radius (2 km)"
+        required: false
+    responses:
+      200:
+        description: "Contains spot data."
+        body:
+          type: "Spot"
+/spots/{id}:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "spot id"
+  delete:
+    displayName: "Delete spot"
+    description: "Delete spot."
+    responses:
+      200:
+        description: "Contains deleted spot."
+        body:
+          type: "Spot"
+  patch:
+    displayName: "Update spot"
+    description: "Update spot. Wrap parameters in [spot]. To update the spot picture\
+      \ pass a base64 encoded string to [spot][picture]."
+    body:
+      type: "SpotEditable"
+    responses:
+      200:
+        description: "Contains spot data"
+        body:
+          type: "Spot"
+/spots/{id}/attachments:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Spot id"
+  get:
+    displayName: "List attachments for a given spot"
+    description: "List attachments for a given spot."
+    responses:
+      200:
+        description: "Contains list of attachments."
+        body:
+          type: "array"
+          items:
+            type: "Attachment"
+  post:
+    displayName: "Upload spot attachment"
+    description: "Upload spot attachment. Wrap attachment parameters in [attachment]"
+    body:
+      type: "string"
+    responses:
+      200:
+        description: "Contains attachment data"
+        body:
+          type: "Attachment"
+/spots/{id}/comments:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Id of spot"
+  get:
+    displayName: "List comments for a given spot"
+    description: "List comments for a given spot."
+    responses:
+      200:
+        description: "Contains list of comments."
+        body:
+          type: "array"
+          items:
+            type: "Comment"
+  post:
+    displayName: "Create spot comment"
+    description: "Create spot comment. Wrap comment parameters in [comment]."
+    body:
+      type: "CommentEditable"
+    responses:
+      200:
+        description: "Contains comment data"
+        body:
+          type: "Comment"
+/spots/{id}/events:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Id of spot"
+  get:
+    displayName: "List events for a given spot"
+    description: "List maps for a given spot."
+    queryParameters:
+      timeframe_start:
+        type: "string"
+        description: "Begin of time range of event (ISO 8601 date format)."
+        required: false
+      timeframe_end:
+        type: "string"
+        description: "End of time range of event (ISO 8601 date format)."
+        required: false
+      bounds:
+        type: "string"
+        description: "To refine your event index request to contain only events within\
+          \                                                             a geographical\
+          \ box pass the followng bounds parameters.                             \
+          \                                F. e. to get events within 'Hamburg, St.\
+          \ Pauli':                                                             bounds[sw_lat]=53.54831449741324\
+          \                                                             bounds[sw_lon]=9.943227767944336\
+          \                                                             bounds[ne_lat]=53.5571103674878\
+          \                                                             bounds[ne_lon]=9.9776029586792"
+        required: false
+    responses:
+      200:
+        description: "Contains list of events."
+        body:
+          type: "array"
+          items:
+            type: "Event"
+  post:
+    displayName: "Create event"
+    description: "Create event. Wrap map parameters in [event]."
+    body:
+      type: "EventEditable"
+    responses:
+      200:
+        description: "Contains event data"
+        body:
+          type: "Event"
+/spots/{id}/respots:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Spot Id"
+  post:
+    displayName: "Respot a spot onto a map"
+    description: "Respot a spot onto a map."
+    body:
+      type: "number"
+    responses:
+      200:
+        description: "Contains respot data."
+        body:
+          type: "Respot"
+/subscriptions:
+  get:
+    displayName: "List subscriptions. Pass no parameters to get own subscriptions"
+    description: "List subscriptions."
+    queryParameters:
+      user_id:
+        type: "integer"
+        description: "Id of user"
+        required: false
+      map_id:
+        type: "integer"
+        description: "Id of map"
+        required: false
+    responses:
+      200:
+        description: "Contains list of subscriptions."
+        body:
+          type: "array"
+          items:
+            type: "Subscription"
+  post:
+    displayName: "Create map subscription"
+    description: "Create map subscription."
+    body:
+      type: "number"
+    responses:
+      200:
+        description: "Contains subscription data."
+        body:
+          type: "Subscription"
+/trends/latest:
+  get:
+    displayName: "List latest maps"
+    description: "List latest maps."
+    responses:
+      200:
+        description: "Contains list of maps."
+        body:
+          type: "array"
+          items:
+            type: "Map"
+/trends/recommended:
+  get:
+    displayName: "List recommended maps"
+    description: "List recommended maps."
+    responses:
+      200:
+        description: "Contains list of maps."
+        body:
+          type: "array"
+          items:
+            type: "Map"
+/users/search:
+  get:
+    displayName: "Search users"
+    description: "Search users"
+    queryParameters:
+      q:
+        type: "string"
+        description: "Query"
+        required: false
+    responses:
+      200:
+        description: "Contains users data."
+        body:
+          type: "User"
+/users/{id}:
+  uriParameters:
+    id:
+      type: "integer"
+      description: "Id of user"
+  get:
+    displayName: "Get user profile"
+    description: "Get profile a user"
+    responses:
+      200:
+        description: "Contains user data"
+        body:
+          type: "User"
+/users/{user_id}/maps:
+  uriParameters:
+    user_id:
+      type: "integer"
+      description: "Id of user"
+  get:
+    displayName: "List maps for a given user"
+    description: "List maps for a given user."
+    responses:
+      200:
+        description: "Contains list of maps."
+        body:
+          type: "array"
+          items:
+            type: "Map"

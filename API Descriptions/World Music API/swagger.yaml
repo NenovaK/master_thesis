@@ -1,0 +1,476 @@
+swagger: '2.0'
+info:
+  version: v1
+  title: World Music API
+  description: |-
+    This is a getting started guide for the World Music API.
+    See http://legal.musicapi.com
+host: DefaultParameterValue.musicapi.com
+basePath: /v1
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /api:
+    get:
+      summary: Api
+      tags:
+        - api
+      operationId: ApiGet
+      produces:
+        - application/json
+      parameters:
+        - name: start
+          in: query
+          required: false
+          type: number
+          format: double
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          description: ''
+        - name: page-size
+          in: query
+          required: false
+          type: number
+          format: double
+          exclusiveMaximum: false
+          exclusiveMinimum: false
+          description: ''
+      responses:
+        '200':
+          description: ''
+        '401':
+          description: Bad token.
+          schema: {}
+        '403':
+          description: 'TODO: Add error message'
+          schema: {}
+      x-unitTests:
+        - request:
+            method: GET
+            uri: /api
+          expectedResponse:
+            x-allowExtraHeaders: true
+            x-bodyMatchMode: NONE
+            x-arrayOrderedMatching: false
+            x-arrayCheckCount: false
+            x-matchResponseSchema: true
+            headers: {}
+          x-testShouldPass: true
+          x-testEnabled: true
+          x-testName: Api1
+          x-testDescription: Testcase for testing endpoint Api
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      summary: Api
+      tags:
+        - api
+      operationId: ApiPost
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/RamlDataType'
+      responses:
+        '200':
+          description: ''
+        '401':
+          description: Bad token.
+          schema: {}
+        '403':
+          description: 'TODO: Add error message'
+          schema: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /entry:
+    get:
+      description: returns a list of entry
+      summary: Entry
+      tags:
+        - entry
+      operationId: EntryGet
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Song'
+          examples: {}
+        '401':
+          description: Bad token.
+          schema: {}
+        '403':
+          description: 'TODO: Add error message'
+          schema: {}
+      x-unitTests:
+        - request:
+            method: GET
+            uri: /entry
+          expectedResponse:
+            x-allowExtraHeaders: true
+            x-bodyMatchMode: NONE
+            x-arrayOrderedMatching: false
+            x-arrayCheckCount: false
+            x-matchResponseSchema: true
+            headers: {}
+          x-testShouldPass: true
+          x-testEnabled: true
+          x-testName: Entry1
+          x-testDescription: returns a list of entry
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      summary: Entry
+      tags:
+        - entry
+      operationId: EntryPost
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Song'
+          examples: {}
+        '401':
+          description: Bad token.
+          schema: {}
+        '403':
+          description: 'TODO: Add error message'
+          schema: {}
+      x-unitTests:
+        - request:
+            method: POST
+            uri: /entry
+          expectedResponse:
+            x-allowExtraHeaders: true
+            x-bodyMatchMode: NONE
+            x-arrayOrderedMatching: false
+            x-arrayCheckCount: false
+            x-matchResponseSchema: true
+            headers: {}
+          x-testShouldPass: true
+          x-testEnabled: true
+          x-testName: Entry11
+          x-testDescription: Testcase for testing endpoint Entry
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  '/songs/{songId}':
+    get:
+      summary: SongsBySongId
+      tags:
+        - songs
+      operationId: SongsBySongIdGet
+      produces:
+        - application/json
+      parameters:
+        - name: songId
+          in: path
+          required: true
+          type: string
+          description: ''
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Song12'
+          examples: {}
+        '401':
+          description: Bad token.
+          schema: {}
+        '403':
+          description: 'TODO: Add error message'
+          schema: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+  /songs:
+    get:
+      summary: Songs
+      tags:
+        - songs
+      operationId: SongsGet
+      produces:
+        - application/json
+      parameters:
+        - name: genre
+          in: query
+          required: true
+          type: string
+          description: filter the songs by genre
+        - name: access_token
+          in: query
+          required: true
+          type: string
+          description: ''
+      responses:
+        '200':
+          description: ''
+        '401':
+          description: Bad token.
+          schema: {}
+        '403':
+          description: 'TODO: Add error message'
+          schema: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+    post:
+      summary: Songs
+      tags:
+        - songs
+      operationId: SongsPost
+      produces:
+        - application/json
+      parameters:
+        - name: access_token
+          in: query
+          required: true
+          type: string
+          description: ''
+      responses:
+        '200':
+          description: ''
+        '401':
+          description: Bad token.
+          schema: {}
+        '403':
+          description: 'TODO: Add error message'
+          schema: {}
+      x-unitTests: []
+      x-operation-settings:
+        CollectParameters: false
+        AllowDynamicQueryParameters: false
+        AllowDynamicFormParameters: false
+        IsMultiContentStreaming: false
+definitions:
+  EnvironmentEnum:
+    title: environmentEnum
+    example: stg
+    x-enum-elements:
+      - name: stg
+        description: ''
+      - name: dev
+        description: ''
+      - name: test
+        description: ''
+      - name: prod
+        description: ''
+    type: string
+    enum:
+      - stg
+      - dev
+      - test
+      - prod
+  Song:
+    title: song
+    type: object
+    properties:
+      title:
+        description: ''
+        type: string
+      artist:
+        description: ''
+        type: string
+  User:
+    title: User
+    example:
+      firstname: John
+    type: object
+    properties:
+      firstname:
+        description: ''
+        type: string
+      lastname:
+        description: ''
+        example: Doe
+        type: string
+    required:
+      - firstname
+  RamlDataType:
+    title: RamlDataType
+    type: object
+    properties:
+      propString:
+        description: ''
+        type: string
+      propStringArray1:
+        description: ''
+        type: array
+        items:
+          type: string
+      ideas:
+        description: ''
+        type: array
+        items:
+          $ref: '#/definitions/IdeasItem'
+      extIdeas:
+        $ref: '#/definitions/ExtIdeas'
+      feedback:
+        description: ''
+        example: very nice
+        type: string
+        minLength: 1
+        maxLength: 255
+        pattern: '[a-zA-Z\s]*'
+      propNumber:
+        description: ''
+        type: integer
+        minimum: 0
+        maximum: 32
+        multipleOf: 2
+        format: int32
+      propInteger:
+        description: ''
+        type: integer
+        minimum: 3
+        maximum: 5
+        multipleOf: 1
+        format: int32
+      propBoolean:
+        description: ''
+        type: boolean
+      propDate:
+        description: ''
+        example: '2015-05-23'
+        type: string
+        format: date
+      userPicture:
+        description: ''
+        type: string
+        format: binary
+      NilValue:
+        $ref: '#/definitions/NilValue'
+      CatOrDog:
+        description: ''
+        type: object
+      CatAndDog:
+        $ref: '#/definitions/CatAndDog'
+      PossibleMeetingDate:
+        description: ''
+        type: string
+        format: date
+    required:
+      - propString
+      - propStringArray1
+      - ideas
+      - extIdeas
+      - feedback
+      - propNumber
+      - propInteger
+      - propBoolean
+      - propDate
+      - userPicture
+      - NilValue
+      - CatOrDog
+      - CatAndDog
+      - PossibleMeetingDate
+  IdeasItem:
+    title: ideasItem
+    type: object
+    properties:
+      comment:
+        description: ''
+        type: string
+    required:
+      - comment
+  ExtIdeas:
+    title: extIdeas
+    allOf:
+      - $ref: '#/definitions/ExtIdeasBaseType'
+      - type: object
+        properties:
+          createdBy:
+            description: ''
+            type: string
+        required:
+          - createdBy
+  ExtIdeasBaseType:
+    title: extIdeasBaseType
+    type: object
+    properties:
+      comment:
+        description: ''
+        type: string
+    required:
+      - comment
+  NilValue:
+    title: NilValue
+    type: object
+    properties:
+      name:
+        description: ''
+        type: string
+      comment:
+        description: ''
+        type: string
+    required:
+      - name
+  CatAndDog:
+    title: CatAndDog
+    type: object
+    properties:
+      name:
+        description: ''
+        type: string
+      color:
+        description: ''
+        type: string
+      fangs:
+        description: ''
+        type: string
+    required:
+      - name
+      - color
+      - fangs
+  Song12:
+    title: Song12
+    example:
+      title: My Song
+      length: 12
+    type: object
+    properties:
+      title:
+        description: ''
+        type: string
+      length:
+        description: ''
+        type: number
+        format: double
+    required:
+      - title
+      - length
