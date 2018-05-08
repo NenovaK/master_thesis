@@ -1,0 +1,199 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Mobile Order API",
+    "description": ""
+  },
+  "host": "localhost:8081",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/orders": {
+      "get": {
+        "description": "lists all orders of a specific user",
+        "summary": "Orders",
+        "tags": [
+          "orders"
+        ],
+        "operationId": "OrdersGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "use to query all orders of a user"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "the amount of elements of each result page"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "exclusiveMaximum": false,
+            "exclusiveMinimum": false,
+            "description": "the page number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Orders"
+            },
+            "examples": {
+              "application/json": {
+                "orders": [
+                  {
+                    "order_id": "ORDER-437563756",
+                    "creation_date": "2016-03-30",
+                    "items": [
+                      {
+                        "product_id": "PRODUCT-1",
+                        "quantity": 5
+                      },
+                      {
+                        "product_id": "PRODUCT-2",
+                        "quantity": 2
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "GET",
+              "uri": "/orders?userId=1964401a-a8b3-40c1-b86e-d8b9f75b5842&size=10&page=0"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "RAW",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {},
+              "body": "{\"orders\":[{\"order_id\":\"ORDER-437563756\",\"creation_date\":\"2016-03-30\",\"items\":[{\"product_id\":\"PRODUCT-1\",\"quantity\":5},{\"product_id\":\"PRODUCT-2\",\"quantity\":2}]}]}"
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "Orders1",
+            "x-testDescription": "lists all orders of a specific user"
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Orders": {
+      "title": "Orders",
+      "example": {
+        "orders": [
+          {
+            "order_id": "ORDER-437563756",
+            "creation_date": "2016-03-30",
+            "items": [
+              {
+                "product_id": "PRODUCT-1",
+                "quantity": 5
+              },
+              {
+                "product_id": "PRODUCT-2",
+                "quantity": 2
+              }
+            ]
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "orders": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
+        }
+      },
+      "required": [
+        "orders"
+      ]
+    },
+    "Order": {
+      "title": "Order",
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "description": "",
+          "type": "string"
+        },
+        "creation_date": {
+          "description": "",
+          "type": "string"
+        },
+        "items": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductItem"
+          }
+        }
+      },
+      "required": [
+        "order_id",
+        "creation_date",
+        "items"
+      ]
+    },
+    "ProductItem": {
+      "title": "ProductItem",
+      "type": "object",
+      "properties": {
+        "product_id": {
+          "description": "",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "product_id",
+        "quantity"
+      ]
+    }
+  }
+}

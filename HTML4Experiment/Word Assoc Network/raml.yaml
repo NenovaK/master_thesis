@@ -1,0 +1,269 @@
+#%RAML 1.0
+title: "Word Associations API"
+description: "The Word Associations Network API allows developers to embed the ability\
+  \ to find associations for a word or phrase into their mobile apps or web services.\
+  \ Words are grouped by semantics, meaning, and psychological perception. The Word\
+  \ Associations Network API currently supports English, French, Spanish, German,\
+  \ Italian, Portuguese, and Russian vocabulary. Please [register and subscribe](https://api.wordassociations.net/subscriptions/)\
+  \ to one of available tariff plans to get a valid API key."
+version: "1.0"
+protocols:
+- "HTTPS"
+baseUri: "https://api.wordassociations.net/associations/v1.0"
+mediaType:
+- "application/json"
+- "application/x-www-form-urlencoded"
+types:
+  Body:
+    type: "object"
+    properties:
+      version:
+        type: "string"
+        required: false
+      code:
+        type: "integer"
+        format: "int32"
+        required: false
+      request:
+        type: "Request"
+        required: false
+      response:
+        type: "array"
+        required: false
+        items:
+          type: "Response"
+  Request:
+    type: "object"
+    properties:
+      text:
+        type: "array"
+        required: false
+        items:
+          type: "string"
+      lang:
+        type: "string"
+        required: false
+      type:
+        type: "string"
+        required: false
+      limit:
+        type: "integer"
+        required: false
+      pos:
+        type: "string"
+        required: false
+      indent:
+        type: "string"
+        required: false
+  Response:
+    type: "object"
+    properties:
+      text:
+        type: "string"
+        required: false
+      items:
+        type: "array"
+        required: false
+        items:
+          type: "Item"
+  Item:
+    type: "object"
+    properties:
+      item:
+        type: "string"
+        required: false
+      weight:
+        type: "number"
+        required: false
+      pos:
+        type: "string"
+        required: false
+securitySchemes:
+  internalApiKey:
+    type: "x-custom"
+    description: "API key. Please register and subscribe to one of available tariff\
+      \ plans to get a valid API key https://api.wordassociations.net/subscriptions/."
+    describedBy:
+      queryParameters:
+        apikey:
+          type: "string"
+          required: false
+securedBy:
+- "internalApiKey"
+/json/search:
+  get:
+    description: "Gets associations with the given word or phrase.\n"
+    queryParameters:
+      text:
+        type: "array"
+        description: "Word or phrase to find associations with.\nTip. You can use\
+          \ multiple parameters 'text' in a request (from 1 to 10 inclusive). This\
+          \ way you can get associations for several input words or phrases in one\
+          \ response.\nRestriction: regardless of the size of the text association\
+          \ lookup is always performed by the first 10 words of the text.\n"
+        minItems: 1
+        maxItems: 10
+        items:
+          type: "string"
+      lang:
+        type: "string"
+        description: "Query language. Use language code for the language of the text:\n\
+          * de - German;\n* en - English;\n* es - Spanish;\n* fr - French;\n* it -\
+          \ Italian;\n* pt - Portuguese;\n* ru - Russian;\n"
+        enum:
+        - "de"
+        - "en"
+        - "es"
+        - "fr"
+        - "it"
+        - "pt"
+        - "ru"
+      type:
+        type: "string"
+        description: "Type of result.\nPossible values: \n* stimulus - an input data\
+          \ (the text parameter) is considered as a response word. The service returns\
+          \ a list of stimuli words, which evoke a given response word;\n* response\
+          \ - an input data (the text parameter) is considered as a stimulus word.\
+          \ The service returns a list of response words, which come to mind for a\
+          \ given stimulus word.\n"
+        default: "stimulus"
+        enum:
+        - "stimulus"
+        - "response"
+        required: false
+      limit:
+        type: "integer"
+        description: "Maximum number of results to return.\nAllows to limit the number\
+          \ of results (associations) in response.\nThe value of this parameter is\
+          \ an integer number from 1 to 300 inclusive.\n"
+        default: 50
+        minimum: 1
+        maximum: 300
+        required: false
+      pos:
+        type: "array"
+        description: "Parts of speech to return.\nAllows to limit results by specified\
+          \ parts of speech. The value of this parameter is a list of parts of speech\
+          \ separated by comma.\nThe following parts of speech codes are supported:\n\
+          * noun\n* adjective\n* verb\n* adverb\n"
+        required: false
+        items:
+          type: "string"
+          enum:
+          - "noun"
+          - "adjective"
+          - "verb"
+          - "adverb"
+      indent:
+        type: "string"
+        description: "Indentation switch for pretty printing of JSON response.\nAllows\
+          \ to either turn on or off space indentation for a response.\nThe following\
+          \ values are allowed:\n* yes - turns indentation with spaces on;\n* no -\
+          \ turn indentation with spaces off;\n"
+        default: "yes"
+        enum:
+        - "yes"
+        - "no"
+        required: false
+    responses:
+      200:
+        description: "Successful response"
+        body:
+          application/json:
+            type: "Body"
+      401:
+        description: "Invalid API key"
+      429:
+        description: "The monthly limit on the number of requests is exceeded"
+      501:
+        description: "The specified language is not supported"
+  post:
+    description: "Gets associations with the given word or phrase.\n"
+    body:
+      application/x-www-form-urlencoded:
+        type: "object"
+        properties:
+          text:
+            type: "array"
+            description: "Word or phrase to find associations with.\nTip. You can\
+              \ use multiple parameters 'text' in a request (from 1 to 10 inclusive).\
+              \ This way you can get associations for several input words or phrases\
+              \ in one response.\nRestriction: regardless of the size of the text\
+              \ association lookup is always performed by the first 10 words of the\
+              \ text.\n"
+            minItems: 1
+            maxItems: 10
+            items:
+              type: "string"
+          lang:
+            type: "string"
+            description: "Query language. Use language code for the language of the\
+              \ text:\n* de - German;\n* en - English;\n* es - Spanish;\n* fr - French;\n\
+              * it - Italian;\n* pt - Portuguese;\n* ru - Russian;\n"
+            enum:
+            - "de"
+            - "en"
+            - "es"
+            - "fr"
+            - "it"
+            - "pt"
+            - "ru"
+          type:
+            type: "string"
+            description: "Type of result.\nPossible values: \n* stimulus - an input\
+              \ data (the text parameter) is considered as a response word. The service\
+              \ returns a list of stimuli words, which evoke a given response word;\n\
+              * response - an input data (the text parameter) is considered as a stimulus\
+              \ word. The service returns a list of response words, which come to\
+              \ mind for a given stimulus word.\n"
+            default: "stimulus"
+            enum:
+            - "stimulus"
+            - "response"
+            required: false
+          limit:
+            type: "integer"
+            description: "Maximum number of results to return.\nAllows to limit the\
+              \ number of results (associations) in response.\nThe value of this parameter\
+              \ is an integer number from 1 to 300 inclusive.\n"
+            default: 50
+            minimum: 1
+            maximum: 300
+            required: false
+          pos:
+            type: "array"
+            description: "Parts of speech to return.\nAllows to limit results by specified\
+              \ parts of speech. The value of this parameter is a list of parts of\
+              \ speech separated by comma.\nThe following parts of speech codes are\
+              \ supported:\n* noun\n* adjective\n* verb\n* adverb\n"
+            required: false
+            items:
+              type: "string"
+              enum:
+              - "noun"
+              - "adjective"
+              - "verb"
+              - "adverb"
+          indent:
+            type: "string"
+            description: "Indentation switch for pretty printing of JSON response.\n\
+              Allows to either turn on or off space indentation for a response.\n\
+              The following values are allowed:\n* yes - turns indentation with spaces\
+              \ on;\n* no - turn indentation with spaces off;\n"
+            default: "yes"
+            enum:
+            - "yes"
+            - "no"
+            required: false
+    responses:
+      200:
+        description: "Successful response"
+        body:
+          application/json:
+            type: "Body"
+      401:
+        description: "Invalid API key"
+      429:
+        description: "The monthly limit on the number of requests is exceeded"
+      501:
+        description: "The specified language is not supported"

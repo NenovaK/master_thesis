@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {margin: 0; padding: 0;}
+
+html, body, .Container
+{
+    height: 100%;
+}
+
+.Container:before
+    {
+        content: '';
+        height: 100%;
+        float: left;
+    }
+
+.Content
+{
+    position: relative;
+    z-index: 1;
+}
+    .Content:after
+    {
+        content: '';
+        clear: both;
+        display: block;
+    }
+
+.Wrapper
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+    .Wrapper > div
+    {
+        height: 100%;
+    }
+
+.LeftContent
+{
+    overflow: hidden;
+}
+.LeftContent:hover
+{
+    overflow: auto;
+}
+.RightContent
+{
+	overflow: hidden;
+    float: right;
+    margin-left: 10px;
+}
+.RightContent:hover
+{
+    overflow: auto;
+}
+form
+{   border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+input[type=text], textarea{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+    <div class="Container">
+        <div class="Content">
+            <div class="Wrapper">
+                <div class="RightContent">
+                    <form action="/action_page.php">
+						<label for="accessAPI">Where can you access the API?</label>
+    					<input type="text" id="accessAPI" name="accessAPI">
+    					  						<br><br>
+						<label for="version">What is the current version of the API?</label><br>
+    					<input type="radio" name="version" value="1.2" checked> 1.2 <br>
+  						<input type="radio" name="version" value="1.0"> 1.0<br>
+  						<input type="radio" name="version" value="2.0"> 2.0<br>
+  						<input type="radio" name="version" value="nn"> I don't know
+  												<br><br>
+						<label for="tos">Where can you find the terms of the service?</label>
+    					<input type="text" id="tos" name="tos">  												
+  												<br><br>  												
+						<label for="contact">Where can you find the contact information of the developer?</label>
+    					<input type="text" id="contact" name="contact">  												
+  												<br><br>
+						<label for="res">How many resources are there?</label><br>
+    					<input type="radio" name="res" value="3" checked> 3<br>
+  						<input type="radio" name="res" value="2"> 2<br>
+  						<input type="radio" name="res" value="1"> 1<br>
+  						<input type="radio" name="res" value="nn"> I don't know
+  												<br><br>
+						<label for="meth">Which HTTP methods are allowed?</label><br>
+    					<input type="checkbox" name="meth" value="HEAD"> HEAD<br>
+  						<input type="checkbox" name="meth" value="POST"> POST<br>
+  						<input type="checkbox" name="meth" value="GET"> GET<br>
+    					<input type="checkbox" name="meth" value="PUT"> PUT<br>
+  						<input type="checkbox" name="meth" value="DELETE"> DELETE<br>
+  						<input type="checkbox" name="meth" value="TRACE"> TRACE<br>
+    					<input type="checkbox" name="meth" value="OPTIONS"> OPTIONS<br>
+  						<input type="checkbox" name="meth" value="CONNECT"> CONNECT
+  												<br><br>
+  						<label for="sec">Which security schema does the API use?</label>
+    					<input type="text" id="sec" name="sec">  												
+  												<br><br>
+						<label for="req1">What do the query parameters ''size'' and ''page'' mean? <br>
+										  What examples of values for these parameters are given in the description? <br>
+										  Where are these parameters used?</label>
+    					<textarea id="req1" name="req1" style="height:100px"></textarea> 
+  						<br><br>
+  						<input type="submit" value="Submit answers">
+					</form>
+                </div>
+                <div class="LeftContent">
+                	<object width="100%" height="1000px" data="swagger.json"></object>
+        		</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<!--o	Where can you access the API? 
+o	What is the current version of the API? 
+o	Where can you find the terms of the service?
+o	Where can you find the contact information of the developer?
+o	How many resources are there? Which HTTP methods are allowed?
+o	Which security schema does the API use? 
+o	What do the query parameters “size” and “page” mean? What examples of values for these parameters are given in the description? Where are these parameters used?
+-->
