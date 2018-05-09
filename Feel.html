@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+Container{
+
+}
+form
+{   width: 50%;
+	border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+input[type=submit] {
+    width: 50%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.likert li {
+  float: left;
+  list-style-type: none;
+  padding: 5px 5px;
+}
+</style>
+</head>
+<body>
+    <div class="Container">
+        <div class="Content">
+        	<form action="/action_page.php">
+        		I would find the description language useful in my job. <br>
+        		<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="easy" value="1" /></li>
+  					<li><input type="radio" name="easy" value="2" /></li>
+  					<li><input type="radio" name="easy" value="3" /></li>
+  					<li><input type="radio" name="easy" value="4" /></li>
+  					<li><input type="radio" name="easy" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>
+				My interaction with the description would be clear and understandable. <br>
+        		<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="easy" value="1" /></li>
+  					<li><input type="radio" name="easy" value="2" /></li>
+  					<li><input type="radio" name="easy" value="3" /></li>
+  					<li><input type="radio" name="easy" value="4" /></li>
+  					<li><input type="radio" name="easy" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>
+  				<input type="submit" value="Submit answers">
+			</form>
+        </div>
+    </div>
+</body>
+</html>
+
+<!--o	Where can you access the API? 
+o	What is the current version of the API?
+o	Where can you find the terms of the service?
+o	Where can you find the contact information of the developer?
+o	How many resources are there? Which HTTP methods are allowed?
+o	Which security schema does the API use? 
+o	Which request should you send in order to get status of a particular flight? What should the request data input contain?
+o	Which request should you send in order to get one specific airport? What parameters does an Airport Object has?  
+-->
