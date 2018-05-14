@@ -7,25 +7,26 @@ Container{
 }
 form
 {   width: 50%;
+    margin: auto;
 	border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
 }
 input[type=submit] {
     width: 50%;
+    margin: auto; 
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
-    margin: 8px 8px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
 .likert li {
   float: left;
   list-style-type: none;
-  padding: 5px 5px;
+  padding: 6px 6px;
 }
 </style>
 </head>
@@ -33,28 +34,227 @@ input[type=submit] {
     <div class="Container">
         <div class="Content">
         	<form action="/action_page.php">
-        		I would find the description language useful in my job. <br>
-        		<ul class="likert">
+        			<label for="U6">I would find the description language useful in my job.</label><br>
+        			<ul class="likert">
   					<li> Totally agree </li>
-  					<li><input type="radio" name="easy" value="1" /></li>
-  					<li><input type="radio" name="easy" value="2" /></li>
-  					<li><input type="radio" name="easy" value="3" /></li>
-  					<li><input type="radio" name="easy" value="4" /></li>
-  					<li><input type="radio" name="easy" value="5" /></li>
+  					<li><input type="radio" name="U6" value="1" /></li>
+  					<li><input type="radio" name="U6" value="2" /></li>
+  					<li><input type="radio" name="U6" value="3" checked/></li>
+  					<li><input type="radio" name="U6" value="4" /></li>
+  					<li><input type="radio" name="U6" value="5" /></li>
   					<li> Totally disagree </li>
 				</ul> 
-				<br> <br>
-				My interaction with the description would be clear and understandable. <br>
-        		<ul class="likert">
+				<br> <br>  <br>
+        			<label for="RA1">Using the description language enables me to accomplish tasks more quickly.</label><br>
+        			<ul class="likert">
   					<li> Totally agree </li>
-  					<li><input type="radio" name="easy" value="1" /></li>
-  					<li><input type="radio" name="easy" value="2" /></li>
-  					<li><input type="radio" name="easy" value="3" /></li>
-  					<li><input type="radio" name="easy" value="4" /></li>
-  					<li><input type="radio" name="easy" value="5" /></li>
+  					<li><input type="radio" name="RA1" value="1" /></li>
+  					<li><input type="radio" name="RA1" value="2" /></li>
+  					<li><input type="radio" name="RA1" value="3" checked/></li>
+  					<li><input type="radio" name="RA1" value="4" /></li>
+  					<li><input type="radio" name="RA1" value="5" /></li>
   					<li> Totally disagree </li>
 				</ul> 
-				<br> <br>
+				<br> <br> <br>        			
+				<label for="RA5">The description language increases my productivity.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="RA5" value="1" /></li>
+  					<li><input type="radio" name="RA5" value="2" /></li>
+  					<li><input type="radio" name="RA5" value="3" checked/></li>
+  					<li><input type="radio" name="RA5" value="4" /></li>
+  					<li><input type="radio" name="RA5" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>        			
+				<label for="EOU3">My interaction with the description language would be clear and understandable.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="EOU3" value="1" /></li>
+  					<li><input type="radio" name="EOU3" value="2" /></li>
+  					<li><input type="radio" name="EOU3" value="3" checked/></li>
+  					<li><input type="radio" name="EOU3" value="4" /></li>
+  					<li><input type="radio" name="EOU3" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>        			
+				<label for="EOU5">It would be easy for me to become skilful at using the description language.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="EOU5" value="1" /></li>
+  					<li><input type="radio" name="EOU5" value="2" /></li>
+  					<li><input type="radio" name="EOU5" value="3" checked/></li>
+  					<li><input type="radio" name="EOU5" value="4" /></li>
+  					<li><input type="radio" name="EOU5" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>        			
+				<label for="EOU6">I would find the description language easy to understand.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="EOU6" value="1" /></li>
+  					<li><input type="radio" name="EOU6" value="2" /></li>
+  					<li><input type="radio" name="EOU6" value="3" checked/></li>
+  					<li><input type="radio" name="EOU6" value="4" /></li>
+  					<li><input type="radio" name="EOU6" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>
+				<label for="A1">Using the description language is a good idea.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="A1" value="1" /></li>
+  					<li><input type="radio" name="A1" value="2" /></li>
+  					<li><input type="radio" name="A1" value="3" checked/></li>
+  					<li><input type="radio" name="A1" value="4" /></li>
+  					<li><input type="radio" name="A1" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>				
+				<label for="AF1">The description language makes work more interesting.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="AF1" value="1" /></li>
+  					<li><input type="radio" name="AF1" value="2" /></li>
+  					<li><input type="radio" name="AF1" value="3" checked/></li>
+  					<li><input type="radio" name="AF1" value="4" /></li>
+  					<li><input type="radio" name="AF1" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>				
+				<label for="AF2">Working with the description language is fun.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="AF2" value="1" /></li>
+  					<li><input type="radio" name="AF2" value="2" /></li>
+  					<li><input type="radio" name="AF2" value="3" checked/></li>
+  					<li><input type="radio" name="AF2" value="4" /></li>
+  					<li><input type="radio" name="AF2" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>				
+				<label for="Affect1">I like working with the description language.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="Affect1" value="1" /></li>
+  					<li><input type="radio" name="Affect1" value="2" /></li>
+  					<li><input type="radio" name="Affect1" value="3" checked/></li>
+  					<li><input type="radio" name="Affect1" value="4" /></li>
+  					<li><input type="radio" name="Affect1" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>				
+				<label for="PBC3">I have the knowledge necessary to understand the description language.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="PBC3" value="1" /></li>
+  					<li><input type="radio" name="PBC3" value="2" /></li>
+  					<li><input type="radio" name="PBC3" value="3" checked/></li>
+  					<li><input type="radio" name="PBC3" value="4" /></li>
+  					<li><input type="radio" name="PBC3" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>
+				I could complete a job or task using the description language... <br>
+				<label for="SE1">...if there was no one around to tell me what to do as I go.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="SE1" value="1" /></li>
+  					<li><input type="radio" name="SE1" value="2" /></li>
+  					<li><input type="radio" name="SE1" value="3" checked/></li>
+  					<li><input type="radio" name="SE1" value="4" /></li>
+  					<li><input type="radio" name="SE1" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>
+				<label for="SE4">...if I could call someone for help if I got stuck.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="SE4" value="1" /></li>
+  					<li><input type="radio" name="SE4" value="2" /></li>
+  					<li><input type="radio" name="SE4" value="3" checked/></li>
+  					<li><input type="radio" name="SE4" value="4" /></li>
+  					<li><input type="radio" name="SE4" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>
+				<label for="SE6">...if I had a lot of time to complete the job for which the description was provided.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="SE6" value="1" /></li>
+  					<li><input type="radio" name="SE6" value="2" /></li>
+  					<li><input type="radio" name="SE6" value="3" checked/></li>
+  					<li><input type="radio" name="SE6" value="4" /></li>
+  					<li><input type="radio" name="SE6" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>
+				<label for="SE7">...if I had just the built-in help facility for assistance.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="SE7" value="1" /></li>
+  					<li><input type="radio" name="SE7" value="2" /></li>
+  					<li><input type="radio" name="SE7" value="3" checked/></li>
+  					<li><input type="radio" name="SE7" value="4" /></li>
+  					<li><input type="radio" name="SE7" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>
+				<label for="ANX1">I feel apprehensive about understanding the description language.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="ANX1" value="1" /></li>
+  					<li><input type="radio" name="ANX1" value="2" /></li>
+  					<li><input type="radio" name="ANX1" value="3" checked/></li>
+  					<li><input type="radio" name="ANX1" value="4" /></li>
+  					<li><input type="radio" name="ANX1" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>
+				<label for="ANX3">I hesitate to use the description language for fear of making mistakes I cannot correct.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="ANX3" value="1" /></li>
+  					<li><input type="radio" name="ANX3" value="2" /></li>
+  					<li><input type="radio" name="ANX3" value="3" checked/></li>
+  					<li><input type="radio" name="ANX3" value="4" /></li>
+  					<li><input type="radio" name="ANX3" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>
+				<label for="BI1">I intend to use the description language.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="BI1" value="1" /></li>
+  					<li><input type="radio" name="BI1" value="2" /></li>
+  					<li><input type="radio" name="BI1" value="3" checked/></li>
+  					<li><input type="radio" name="BI1" value="4" /></li>
+  					<li><input type="radio" name="BI1" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>
+				<label for="BI2">I predict I would use the description language.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="BI2" value="1" /></li>
+  					<li><input type="radio" name="BI2" value="2" /></li>
+  					<li><input type="radio" name="BI2" value="3" checked/></li>
+  					<li><input type="radio" name="BI2" value="4" /></li>
+  					<li><input type="radio" name="BI2" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>
+				<label for="BI3">I plan to use the description language.</label><br>
+        			<ul class="likert">
+  					<li> Totally agree </li>
+  					<li><input type="radio" name="BI3" value="1" /></li>
+  					<li><input type="radio" name="BI3" value="2" /></li>
+  					<li><input type="radio" name="BI3" value="3" checked/></li>
+  					<li><input type="radio" name="BI3" value="4" /></li>
+  					<li><input type="radio" name="BI3" value="5" /></li>
+  					<li> Totally disagree </li>
+				</ul> 
+				<br> <br>  <br>
   				<input type="submit" value="Submit answers">
 			</form>
         </div>
