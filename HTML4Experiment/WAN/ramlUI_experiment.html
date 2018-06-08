@@ -72,7 +72,7 @@ input[type=text], textarea{
     box-sizing: border-box;
 }
 
-input[type=submit] {
+input[type=submit]:enabled {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -82,14 +82,23 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
 }
+
+input[type=submit]:disabled{
+ 	width: 50%;
+ 	background-color: #dddddd;
+ }
 </style>
 </head>
 <body>
+	<div>Time left = <span id="timer"></span>
+ 	</div>
     <div class="Container">
         <div class="Content">
             <div class="Wrapper">
                 <div class="RightContent">
-                    <form action="/action_page.php">
+                    <form id="myForm" action="submit.php" method = "post">
+                    	<input type="radio" name="api" value="WAN" checked style="visibility: hidden">
+                     	<input type="radio" name="desc" value="RUI" checked style="visibility: hidden"> <br>
 						<label for="accessAPI">Where can you access the API?</label>
     					<input type="text" id="accessAPI" name="accessAPI">
     					  						<br><br>
@@ -112,14 +121,14 @@ input[type=submit] {
   						<input type="radio" name="res" value="nn"> I don't know
   												<br><br>
 						<label for="meth">Which HTTP methods are allowed?</label><br>
-    					<input type="checkbox" name="meth" value="HEAD"> HEAD<br>
-  						<input type="checkbox" name="meth" value="POST"> POST<br>
-  						<input type="checkbox" name="meth" value="GET"> GET<br>
-    					<input type="checkbox" name="meth" value="PUT"> PUT<br>
-  						<input type="checkbox" name="meth" value="DELETE"> DELETE<br>
-  						<input type="checkbox" name="meth" value="TRACE"> TRACE<br>
-    					<input type="checkbox" name="meth" value="OPTIONS"> OPTIONS<br>
-  						<input type="checkbox" name="meth" value="CONNECT"> CONNECT
+    					<input type="checkbox" name="meth[]" value="HEAD"> HEAD<br>
+  						<input type="checkbox" name="meth[]" value="POST"> POST<br>
+  						<input type="checkbox" name="meth[]" value="GET"> GET<br>
+    					<input type="checkbox" name="meth[]" value="PUT"> PUT<br>
+  						<input type="checkbox" name="meth[]" value="DELETE"> DELETE<br>
+  						<input type="checkbox" name="meth[]" value="TRACE"> TRACE<br>
+    					<input type="checkbox" name="meth[]" value="OPTIONS"> OPTIONS<br>
+  						<input type="checkbox" name="meth[]" value="CONNECT"> CONNECT
   												<br><br>
   						<label for="sec">Which security schema does the API use?</label>
     					<input type="text" id="sec" name="sec">  												
@@ -133,9 +142,10 @@ input[type=submit] {
     					<textarea id="req2" name="req2" style="height:100px"></textarea>   
   												<br><br>
   						<label for="req3">Which responses can you get from the API after sending a POST request? </label>
-    					<textarea id="req3" name="req3" style="height:100px"></textarea>    												
+    					<textarea id="req3" name="req3" style="height:100px"></textarea>
+    					<textarea id="req4" name="req4" style="visibility: hidden"></textarea>     												
   						<br><br>
-  						<input type="submit" value="Submit answers">
+  						<input type="submit" name="submit" value="Submit answers">
 					</form>
                 </div>
                 <div class="LeftContent">
@@ -144,6 +154,9 @@ input[type=submit] {
             </div>
         </div>
     </div>
+	<span id="result"></span>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="my_script.js" type="text/javascript"></script>
 </body>
 </html>
 
