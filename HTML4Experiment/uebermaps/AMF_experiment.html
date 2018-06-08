@@ -51,6 +51,7 @@ html, body, .Container
 {
 	overflow: hidden;
     float: right;
+    width: 50%;
     margin-left: 10px;
 }
 .RightContent:hover
@@ -64,7 +65,7 @@ form
 }
 input[type=text], textarea{
     width: 100%;
-    padding: 12px 20px;
+    padding: 12px 10px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -76,7 +77,7 @@ input[type=submit]:enabled {
     width: 100%;
     background-color: #4CAF50;
     color: white;
-    padding: 14px 20px;
+    padding: 12px 10px;
     margin: 8px 0;
     border: none;
     border-radius: 4px;
@@ -134,15 +135,15 @@ input[type=submit]:disabled{
   						<label for="sec">Which security schema does the API use?</label>
     					<input type="text" id="sec" name="sec">  												
   												<br><br>
-						<label for="req1">Which request should you send in order to authenticate an user? <br> 
+						<label for="req1">Which request should you send in order to authenticate an user? 
 										  What should the authentication contain?</label>
     					<textarea id="req1" name="req1" style="height:100px"></textarea> 
   												<br><br>
-						<label for="req2">Which request should you send in order to get the profile of a specific user? <br>
+						<label for="req2">Which request should you send in order to get the profile of a specific user?
 										  What does an user profile contain?</label>
     					<textarea id="req2" name="req2" style="height:100px"></textarea> 
   												<br><br>
-						<label for="req3">A map can have three types of visibility. <br>
+						<label for="req3">A map can have three types of visibility.
 										  Which are these? How did you get this information?</label>
     					<textarea id="req3" name="req3" style="height:100px"></textarea>
     					<textarea id="req4" name="req4" style="visibility: hidden"></textarea>			  						

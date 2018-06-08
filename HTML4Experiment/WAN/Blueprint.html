@@ -51,6 +51,7 @@ html, body, .Container
 {
 	overflow: hidden;
     float: right;
+    width: 50%;
     margin-left: 10px;
 }
 .RightContent:hover
@@ -64,7 +65,7 @@ form
 }
 input[type=text], textarea{
     width: 100%;
-    padding: 12px 20px;
+    padding: 12px 10px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -76,7 +77,7 @@ input[type=submit]:enabled {
     width: 100%;
     background-color: #4CAF50;
     color: white;
-    padding: 14px 20px;
+    padding: 12px 10px;
     margin: 8px 0;
     border: none;
     border-radius: 4px;
@@ -133,11 +134,11 @@ input[type=submit]:disabled{
   						<label for="sec">Which security schema does the API use?</label>
     					<input type="text" id="sec" name="sec">  												
   												<br><br>
-						<label for="req1">Which languages does the API supports? <br>
+						<label for="req1">Which languages does the API supports? 
 									      Where can you find the language codes for each language?</label>
     					<textarea id="req1" name="req1" style="height:100px"></textarea>  												
   												<br><br>
-  						<label for="req2">Which parameters should you send with the GET request? <br>
+  						<label for="req2">Which parameters should you send with the GET request? 
   										  Which parameters can you send in addition to these?</label>
     					<textarea id="req2" name="req2" style="height:100px"></textarea>   
   												<br><br>
