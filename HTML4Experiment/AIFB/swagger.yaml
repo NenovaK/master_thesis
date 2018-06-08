@@ -1,0 +1,535 @@
+swagger: '2.0'
+info:
+  description: >-
+    This Web API is an RESTful Wrapper for the FLS visitour server. It allows to
+    create, read, update and delete Work Orders for field technicians as
+    examined in the STEP (https://www.projekt-step.de/en/) research project. All
+    interactions are state-based and purly RESTful. Creating a new Work Order
+    will make the server plan a new job for the best suited technician and
+    propose three possible appointments. Overwriting an Work Order and setting
+    an appropriate state (recorded, confirmed etc.) results in an update of the
+    tour planning. Be aware: Side-effects DO happen, as long as Work Orders are
+    not confirmed! More information can be found at
+    https://www.fastleansmart.com/anwendungen/tourenplanung/
+  version: 0.0.3
+  title: FLSVisitourRestAPI
+host: km.aifb.kit.edu
+basePath: /services/bader4/step
+tags:
+  - name: visitour
+paths:
+  '/visitour/call/{child}':
+    get:
+      tags:
+        - visitour
+      summary: Returns the FLS Visitour planning for Work Order object in Linked Data
+      description: ''
+      operationId: doGet
+      produces:
+        - text/plain
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/json
+        - application/rdf+xml
+      parameters:
+        - name: child
+          in: path
+          required: true
+          type: string
+        - name: Accept
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Read the resource state successfully
+        '404':
+          description: resource not available
+        '500':
+          description: internal server error
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#GET>'
+        '<http://www.w3.org/ns/hydra/core#returns>': 'http://people.aifb.kit.edu/mu2771/step/WorkOrder'
+    head:
+      tags:
+        - visitour
+      summary: Returns GET response
+      description: ''
+      operationId: doHead
+      produces:
+        - text/plain
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/json
+        - application/rdf+xml
+      parameters:
+        - name: child
+          in: path
+          required: true
+          type: string
+        - name: Accept
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: 'http://people.aifb.kit.edu/mu2771/step/WorkOrder'
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#HEAD>'
+        '<http://www.w3.org/ns/hydra/core#returns>': 'http://people.aifb.kit.edu/mu2771/step/WorkOrder'
+    put:
+      tags:
+        - visitour
+      summary: >-
+        Overwrites the FLS Visitour planning for a specific Work Order object
+        state
+      description: ''
+      operationId: doPut
+      consumes:
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/rdf+xml
+      produces:
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/rdf+xml
+      parameters:
+        - name: child
+          in: path
+          required: true
+          type: string
+        - name: Accept
+          in: header
+          required: false
+          type: string
+        - in: body
+          name: body
+          description: A new Work Order state
+          required: true
+          schema:
+            type: string
+          x-examples:
+            text/turtle: "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix base: <http://host/step/visitour/call/> .\n\n:PC-0003128 <http://step.aifb.kit.edu/hasState> \"recorded\"^^<http://www.w3.org/2001/XMLSchema#string>  ;\n    \ta <http://step.aifb.kit.edu/Auftrag>  ;\n    \t<http://step.aifb.kit.edu/extId> \"PC-0003128\"^^<http://www.w3.org/2001/XMLSchema#string>  ;\n        \"31577\"^^<http://www.w3.org/2001/XMLSchema#string>  ;\n\t\t<http://step.aifb.kit.edu/timeFrom> \"2018-03-28T09:00:00+02:00\"^^<http://www.w3.org/2001/XMLSchema#dateTime>  ;\n\t\t<http://step.aifb.kit.edu/timeTo> \"2018-03-31T18:00:00+02:00\"^^<http://www.w3.org/2001/XMLSchema#dateTime>  ;\n\t\t<http://step.aifb.kit.edu/dateFrom> \"2018-03-28T18:00:00+02:00\"^^<http://www.w3.org/2001/XMLSchema#dateTime>  ;\n\t\t<http://step.aifb.kit.edu/dateTo> \"2018-04-01T00:00:00+02:00\"^^<http://www.w3.org/2001/XMLSchema#dateTime>  ;\n\t\t<http://step.aifb.kit.edu/duration> \"120\"^^<http://www.w3.org/2001/XMLSchema#integer>  ;\n\t\t<http://step.aifb.kit.edu/city> \"Regensburg\"^^<http://www.w3.org/2001/XMLSchema#string>  ;\n\t\t<http://step.aifb.kit.edu/country> \"Non\"^^<http://www.w3.org/2001/XMLSchema#string>  ;\n\t\t<http://step.aifb.kit.edu/street> \"Hauptstra?e 1\"^^<http://www.w3.org/2001/XMLSchema#string>  ;\n\t\t<http://step.aifb.kit.edu/zip> \"93057\"^^<http://www.w3.org/2001/XMLSchema#string> ."
+      responses:
+        '200':
+          description: Resource was changed successfully
+        '404':
+          description: resource not available
+        '500':
+          description: internal server error
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#PUT>'
+        '<http://www.w3.org/ns/hydra/core#returns>': status code
+    delete:
+      tags:
+        - visitour
+      summary: Deletes this Work Order object
+      description: ''
+      operationId: doDelete
+      parameters:
+        - name: child
+          in: path
+          required: true
+          type: string
+        - name: Accept
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: resource was deleted successfully
+        '404':
+          description: resource not available
+        '500':
+          description: internal server error
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#DELETE>'
+        '<http://www.w3.org/ns/hydra/core#returns>': status code
+  /visitour/call:
+    get:
+      tags:
+        - visitour
+      summary: read all Work Orders and some meta data
+      description: ''
+      operationId: doGet_1
+      produces:
+        - text/plain
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/json
+        - application/rdf+xml
+      parameters:
+        - name: Accept
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Read the resource state successfully
+        '404':
+          description: resource not available
+        '500':
+          description: internal server error
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#GET>'
+        '<http://www.w3.org/ns/hydra/core#returns>': >-
+          "a description of the web api and a set of
+          <http://people.aifb.kit.edu/mu2771/step/WorkOrder>"^^<http://www.w3.org/2001/XMLSchema#string>
+    head:
+      tags:
+        - visitour
+      summary: Returns GET response
+      description: ''
+      operationId: doHead_1
+      produces:
+        - text/plain
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/json
+        - application/rdf+xml
+      parameters:
+        - name: Accept
+          in: header
+          required: false
+          type: string
+      responses:
+        default:
+          description: successful operation
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#HEAD>'
+        '<http://www.w3.org/ns/hydra/core#returns>': >-
+          "a description of the web api and a set of
+          <http://people.aifb.kit.edu/mu2771/step/WorkOrder>"^^<http://www.w3.org/2001/XMLSchema#string>
+    post:
+      tags:
+        - visitour
+      summary: create new work order
+      description: create new work order in the tour planning system
+      operationId: doPost
+      consumes:
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/rdf+xml
+      produces:
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/rdf+xml
+      parameters:
+        - name: Accept
+          in: header
+          required: false
+          type: string
+        - in: body
+          name: body
+          description: an RDF WorkOrder
+          required: true
+          schema:
+            $ref: 'http://people.aifb.kit.edu/mu2771/step/WorkOrder'
+          x-examples:
+            text/turtle: "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix base: <http://host/step/visitour/call/> .\n\n:PC-0003128 <http://step.aifb.kit.edu/hasState> \"recorded\"^^<http://www.w3.org/2001/XMLSchema#string>  ;\n    \ta <http://step.aifb.kit.edu/Auftrag>  ;\n    \t<http://step.aifb.kit.edu/extId> \"PC-0003128\"^^<http://www.w3.org/2001/XMLSchema#string>  ;\n        \"31577\"^^<http://www.w3.org/2001/XMLSchema#string>  ;\n\t\t<http://step.aifb.kit.edu/timeFrom> \"2018-03-28T09:00:00+02:00\"^^<http://www.w3.org/2001/XMLSchema#dateTime>  ;\n\t\t<http://step.aifb.kit.edu/timeTo> \"2018-03-31T18:00:00+02:00\"^^<http://www.w3.org/2001/XMLSchema#dateTime>  ;\n\t\t<http://step.aifb.kit.edu/dateFrom> \"2018-03-28T18:00:00+02:00\"^^<http://www.w3.org/2001/XMLSchema#dateTime>  ;\n\t\t<http://step.aifb.kit.edu/dateTo> \"2018-04-01T00:00:00+02:00\"^^<http://www.w3.org/2001/XMLSchema#dateTime>  ;\n\t\t<http://step.aifb.kit.edu/duration> \"120\"^^<http://www.w3.org/2001/XMLSchema#integer>  ;\n\t\t<http://step.aifb.kit.edu/city> \"Regensburg\"^^<http://www.w3.org/2001/XMLSchema#string>  ;\n\t\t<http://step.aifb.kit.edu/country> \"Non\"^^<http://www.w3.org/2001/XMLSchema#string>  ;\n\t\t<http://step.aifb.kit.edu/street> \"Hauptstra?e 1\"^^<http://www.w3.org/2001/XMLSchema#string>  ;\n\t\t<http://step.aifb.kit.edu/zip> \"93057\"^^<http://www.w3.org/2001/XMLSchema#string> ."
+      responses:
+        '201':
+          description: New child resource was created
+        '404':
+          description: resource not available
+        '500':
+          description: internal server error
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#POST>'
+        '<http://www.w3.org/ns/hydra/core#returns>': status code
+  /visitour:
+    get:
+      tags:
+        - visitour
+      summary: Returns the fls visitour REST web service
+      description: notes
+      operationId: doGet_2
+      produces:
+        - text/plain
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/json
+        - application/rdf+xml
+      parameters:
+        - name: Accept
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Read the resource state successfully
+        '404':
+          description: resource not available
+        '500':
+          description: internal server error
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#GET>'
+        '<http://www.w3.org/ns/hydra/core#returns>': WebApi
+    head:
+      tags:
+        - visitour
+      summary: Returns GET response
+      description: ''
+      operationId: doHead_2
+      produces:
+        - text/plain
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/json
+        - application/rdf+xml
+      parameters:
+        - name: Accept
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: New child resource was created
+        '303':
+          description: See other resource for better description
+        '404':
+          description: resource not available
+        '500':
+          description: internal server error
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#HEAD>'
+        '<http://www.w3.org/ns/hydra/core#returns>': WebApi
+  '/visitour/fieldmanager/{child}':
+    get:
+      tags:
+        - visitour
+      summary: Returns the field manager for this resource
+      description: ''
+      operationId: doGet_3
+      produces:
+        - text/plain
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/json
+        - application/rdf+xml
+      parameters:
+        - name: child
+          in: path
+          required: true
+          type: string
+        - name: Accept
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Read the resource state successfully
+        '404':
+          description: resource not available
+        '500':
+          description: internal server error
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#GET>'
+        '<http://www.w3.org/ns/hydra/core#returns>': 'http://people.aifb.kit.edu/mu2771/step#Technician'
+    head:
+      tags:
+        - visitour
+      summary: Returns the field manager for this resource
+      description: ''
+      operationId: doHead_3
+      produces:
+        - text/plain
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/json
+        - application/rdf+xml
+      parameters:
+        - name: child
+          in: path
+          required: true
+          type: string
+        - name: Accept
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: 'http://people.aifb.kit.edu/mu2771/step#Technician'
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#HEAD>'
+        '<http://www.w3.org/ns/hydra/core#returns>': 'http://people.aifb.kit.edu/mu2771/step#Technician'
+    patch:
+      tags:
+        - visitour
+      summary: semantics of PATCH not fixed
+      description: ''
+      operationId: doPatch
+      produces:
+        - text/plain
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/json
+        - application/rdf+xml
+      parameters:
+        - name: child
+          in: path
+          required: true
+          type: string
+        - name: Accept
+          in: header
+          required: false
+          type: string
+      responses:
+        default:
+          description: successful operation
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#PATCH>'
+  /visitour/fieldmanager:
+    get:
+      tags:
+        - visitour
+      summary: Returns the fls visitour REST web service for fieldmanagers
+      description: ''
+      operationId: doGet_4
+      produces:
+        - text/plain
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/json
+        - application/rdf+xml
+      parameters:
+        - name: Accept
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Read the resource state successfully
+        '404':
+          description: resource not available
+        '500':
+          description: internal server error
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#GET>'
+        '<http://www.w3.org/ns/hydra/core#returns>': the current Fieldmanagers known to the tour planning system
+    head:
+      tags:
+        - visitour
+      summary: Returns doGet() method
+      description: ''
+      operationId: doHead_4
+      produces:
+        - text/plain
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/json
+        - application/rdf+xml
+      parameters:
+        - name: Accept
+          in: header
+          required: false
+          type: string
+      responses:
+        default:
+          description: successful operation
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#HEAD>'
+        '<http://www.w3.org/ns/hydra/core#returns>': status code
+    post:
+      tags:
+        - visitour
+      summary: Creates a new fieldmanager
+      description: ''
+      operationId: doPost_1
+      consumes:
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/rdf+xml
+      produces:
+        - text/html
+        - application/n-triples
+        - application/n-quads
+        - text/turtle
+        - application/ld+json
+        - application/rdf+xml
+      parameters:
+        - name: Accept
+          in: header
+          required: false
+          type: string
+        - in: body
+          name: body
+          description: input as an RDF graph object
+          required: true
+          schema:
+            $ref: 'https://www.w3.org/TR/rdf11-primer/'
+      responses:
+        '501':
+          description: method not yet implemented
+      x-hydra:
+        '<http://www.w3.org/ns/hydra/core#method>': '<http://www.w3.org/2011/http-methods#POST>'
+        '<http://www.w3.org/ns/hydra/core#returns>': status code
+definitions:
+  WebResource:
+    type: object
+  FlsVisitourCallWebContainer:
+    type: object
+  FlsVisitourCallWebInstance:
+    type: object
+  RdfWorkOrder:
+    type: object
+  any RDF qraph serialization:
+    type: object
+  FlsVisitourFieldmanagerWebContainer:
+    type: object
+  FlsVisitourFieldmanagerWebInstance:
+    type: object
+  RdfFieldmanager:
+    type: object

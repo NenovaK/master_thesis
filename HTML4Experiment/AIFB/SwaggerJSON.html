@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {margin: 0; padding: 0;}
+
+html, body, .Container
+{
+    height: 100%;
+}
+
+.Container:before
+    {
+        content: '';
+        height: 100%;
+        float: left;
+    }
+
+.Content
+{
+    position: relative;
+    z-index: 1;
+}
+    .Content:after
+    {
+        content: '';
+        clear: both;
+        display: block;
+    }
+
+.Wrapper
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+    .Wrapper > div
+    {
+        height: 100%;
+    }
+
+.LeftContent
+{
+    overflow: hidden;
+}
+.LeftContent:hover
+{
+    overflow: auto;
+}
+.RightContent
+{
+	overflow: hidden;
+    float: right;
+    margin-left: 10px;
+}
+.RightContent:hover
+{
+    overflow: auto;
+}
+form
+{   border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+input[type=text], textarea{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit]:enabled {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:disabled{
+ 	width: 50%;
+	background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+	<div>Time left = <span id="timer"></span>
+ 	</div>
+    <div class="Container">
+        <div class="Content">
+            <div class="Wrapper">
+                <div class="RightContent">
+                    <form id="myForm" action="submit.php" method = "post">
+                       	<input type="radio" name="api" value="AIFB" checked style="visibility: hidden">
+                     	<input type="radio" name="desc" value="AMF" checked style="visibility: hidden"> <br>
+						<label for="accessAPI">Where can you access the API? Where can you find more information about the API?</label>
+    					<input type="text" id="accessAPI" name="accessAPI">
+    					  						<br><br>
+						<label for="version">What is the current version of the API?</label><br>
+    					<input type="radio" name="version" value="0.0.3" checked> 0.0.3 <br>
+  						<input type="radio" name="version" value="1.0.4"> 1.0.4<br>
+  						<input type="radio" name="version" value="2.0.6"> 2.0.6<br>
+  						<input type="radio" name="version" value="nn"> I don't know
+  												<br><br>
+						<label for="tos">Where can you find the terms of the service?</label>
+    					<input type="text" id="tos" name="tos">  												
+  												<br><br>  												
+						<label for="contact">Where can you find the contact information of the developer?</label>
+    					<input type="text" id="contact" name="contact">  												
+  												<br><br>
+						<label for="res">How many resources are there?</label><br>
+    					<input type="radio" name="res" value="1" checked> 1<br>
+  						<input type="radio" name="res" value="3"> 3<br>
+  						<input type="radio" name="res" value="5"> 5<br>
+  						<input type="radio" name="res" value="nn"> I don't know
+  												<br><br>
+						<label for="meth">Which HTTP methods are allowed?</label><br>
+    					<input type="checkbox" name="meth[]" value="HEAD"> HEAD<br>
+  						<input type="checkbox" name="meth[]" value="POST"> POST<br>
+  						<input type="checkbox" name="meth[]" value="GET"> GET<br>
+    					<input type="checkbox" name="meth[]" value="PUT"> PUT<br>
+  						<input type="checkbox" name="meth[]" value="DELETE"> DELETE<br>
+  						<input type="checkbox" name="meth[]" value="TRACE"> TRACE<br>
+    					<input type="checkbox" name="meth[]" value="OPTIONS"> OPTIONS<br>
+  						<input type="checkbox" name="meth[]" value="CONNECT"> CONNECT
+  												<br><br>
+  						<label for="sec">Which security schema does the API use?</label>
+    					<input type="text" id="sec" name="sec">  												
+  												<br><br>
+						<label for="req1">Which request should you send in order to get all field managers known <br>
+								to the system? Which responses can you get from the API after sending this request?</label>
+    					<textarea id="req1" name="req1" style="height:100px"></textarea>  												
+  												<br><br>
+  						<label for="req2">Which request should you send in order to create a new work order <br>
+  										in the tour planning system and what should the request data input contain?</label>
+    					<textarea id="req2" name="req2" style="height:100px"></textarea>
+    					<label for="req3">You decided to make some changes on a specific work order. <br> 
+    									Which request should you send? <br>
+    									Where can you find the semantics of the HTTP method? </label>
+    					<textarea id="req3" name="req3" style="height:100px"></textarea>
+    					<label for="req4">Where can the semantics of a new WorkOrder be found? <br>
+    									Can you give an example how the WorkOrder can look?</label>
+    					<textarea id="req4" name="req4" style="height:100px"></textarea>   
+  												
+  						<br><br>
+  						<input type="submit" name="submit" value="Submit answers">
+					</form>
+                </div>
+                <div class="LeftContent">
+                	<object width="100%" height="1000px" data="swagger.json"></object>
+        		</div>
+            </div>
+        </div>
+    </div>
+    <span id="result"></span>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="my_script.js" type="text/javascript"></script>
+</body>
+</html>
+
+<!--o	Where can you access the API? 
+o	What is the current version of the API?
+o	Where can you find the terms of the service?
+o	Where can you find the contact information of the developer?
+o	How many resources are there? Which HTTP methods are allowed?
+o	Which security schema does the API use? 
+o	Which request should you send in order to get status of a particular flight? What should the request data input contain?
+o	Which request should you send in order to get one specific airport? What parameters does an Airport Object has?  
+-->
