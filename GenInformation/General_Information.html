@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+Container{
+
+}
+form
+{   width: 80%;
+    margin: auto;
+	border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+input[type=submit]:enabled {
+    width: 50%;
+    margin: auto; 
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type=submit]:disabled{
+ 	width: 50%;
+	background-color: #dddddd;
+}
+.likert li {
+  float: left;
+  list-style-type: none;
+  padding: 6px 6px;
+}
+
+</style>
+</head>
+<body>
+<div>Time left = <span id="timer"></span>
+ 	</div>
+    <div class="Container">
+        <div class="Content">
+        	<form id="myForm" action="submit.php" method = "post">
+                <input type="text" id="client_id" name="client_id" style="visibility: hidden"> <br>
+                
+                <label for="study">What do you study?</label><br>
+        		<input type="radio" name="study" value="InWi"> Informationswirtschaft &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  
+  				<input type="radio" name="study" value="WiWi"> Wirtschaftsingenieurwesen &nbsp &nbsp &nbsp &nbsp
+  				<input type="radio" name="study" value="Info"> Informatik <br> <br>
+  				<input type="radio" name="study" value="TVWL"> Technische Volkswirtschaftslehre &nbsp &nbsp &nbsp &nbsp
+  				<input type="radio" name="study" value="WiMath"> Wirtschaftsmathematik &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp	
+  				<input type="radio" name="study" value="Math"> Mathematik 
+				<br> <br>  <br>
+				
+				<label for="bachmaster">Do you study in Bachelor, Master or Diplom?</label><br>
+        		<input type="radio" name="bachmaster" value="bach"> Bachelor &nbsp &nbsp &nbsp
+  				<input type="radio" name="bachmaster" value="mast"> Master &nbsp &nbsp &nbsp
+  				<input type="radio" name="bachmaster" value="diplom"> Diplom
+  				<br> <br>  <br>
+  				
+				<label for="sem">In which semester are you?</label><br>
+        		<input type="radio" name="sem" value="1"> 1 &nbsp &nbsp &nbsp
+  				<input type="radio" name="sem" value="2"> 2 &nbsp &nbsp &nbsp
+  				<input type="radio" name="sem" value="3"> 3  &nbsp &nbsp &nbsp
+  				<input type="radio" name="sem" value="4"> 4 &nbsp &nbsp &nbsp
+  				<input type="radio" name="sem" value="5"> 5 &nbsp &nbsp &nbsp
+  				<input type="radio" name="sem" value="6"> 6 &nbsp &nbsp &nbsp
+  				<input type="radio" name="sem" value="7"> 7 &nbsp &nbsp &nbsp
+  				<input type="radio" name="sem" value="8"> 8 &nbsp &nbsp &nbsp
+  				<input type="radio" name="sem" value="9"> 9 &nbsp &nbsp &nbsp
+  				<br> <br>  <br>
+  				
+  				<label for="devexp">Do you have any practical experience with software development?</label><br>
+        		<input type="radio" name="devexp" value="1"> Yes &nbsp &nbsp &nbsp
+  				<input type="radio" name="devexp" value="2"> No
+  				<br> <br>  <br>
+  				
+  				<label for="howexp">If yes, how did you get that experience?</label><br>
+        		<input type="radio" name="howexp" value="stud"> as student &nbsp &nbsp &nbsp
+  				<input type="radio" name="howexp" value="hiwi"> as working student in the university (HiWi) &nbsp &nbsp &nbsp
+  				<input type="radio" name="howexp" value="werkst"> as working student in a company (Werkstudent)
+  				<br> <br>  <br>
+  				
+  				<label for="REST">To what extent are you familiar with REST</label><br>
+        			<ul class="likert">
+  					<li> Not familiar at all </li>
+  					<li><input type="radio" name="REST" value="1" /></li>
+  					<li><input type="radio" name="REST" value="2" /></li>
+  					<li><input type="radio" name="REST" value="3" checked/></li>
+  					<li><input type="radio" name="REST" value="4" /></li>
+  					<li><input type="radio" name="REST" value="5" /></li>
+  					<li> Very familiar </li>
+				</ul> 
+				<br> <br>  <br>
+				
+				<label for="API">To what extent are you familiar with APIs</label><br>
+        			<ul class="likert">
+  					<li> Not familiar at all </li>
+  					<li><input type="radio" name="API" value="1" /></li>
+  					<li><input type="radio" name="API" value="2" /></li>
+  					<li><input type="radio" name="API" value="3" checked/></li>
+  					<li><input type="radio" name="API" value="4" /></li>
+  					<li><input type="radio" name="API" value="5" /></li>
+  					<li> Very familiar </li>
+				</ul> 
+				<br> <br>  <br>
+				
+				To what extent are you familiar with these description languages: <br> <br>
+				
+				<label for="OAS">Swagger / OpenAPI</label><br>
+        			<ul class="likert">
+  					<li> Not familiar at all </li>
+  					<li><input type="radio" name="OAS" value="1" /></li>
+  					<li><input type="radio" name="OAS" value="2" /></li>
+  					<li><input type="radio" name="OAS" value="3" checked/></li>
+  					<li><input type="radio" name="OAS" value="4" /></li>
+  					<li><input type="radio" name="OAS" value="5" /></li>
+  					<li> Very familiar </li>
+				</ul> 
+				<br> <br>
+				
+				<label for="RAML">RAML</label><br>
+        			<ul class="likert">
+  					<li> Not familiar at all </li>
+  					<li><input type="radio" name="RAML" value="1" /></li>
+  					<li><input type="radio" name="RAML" value="2" /></li>
+  					<li><input type="radio" name="RAML" value="3" checked/></li>
+  					<li><input type="radio" name="RAML" value="4" /></li>
+  					<li><input type="radio" name="RAML" value="5" /></li>
+  					<li> Very familiar </li>
+				</ul> 
+				<br> <br> 
+				
+				<label for="BP">API Blueprint</label><br>
+        			<ul class="likert">
+  					<li> Not familiar at all </li>
+  					<li><input type="radio" name="BP" value="1" /></li>
+  					<li><input type="radio" name="BP" value="2" /></li>
+  					<li><input type="radio" name="BP" value="3" checked/></li>
+  					<li><input type="radio" name="BP" value="4" /></li>
+  					<li><input type="radio" name="BP" value="5" /></li>
+  					<li> Very familiar </li>
+				</ul> 
+  				<br> <br>  <br>
+  				
+  				<input type="submit" name="sub" id="sub" value="Submit answers">
+			</form>
+        </div>
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="my_script.js" type="text/javascript"></script>
+</body>
+</html>
