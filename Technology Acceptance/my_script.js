@@ -5,8 +5,12 @@ startTimer();
 var url_string = window.location.href;
 var url = new URL(url_string);
 var client_id = url.searchParams.get("client_id");
+var api = url.searchParams.get("api");
+var desc = url.searchParams.get("desc");
 console.log(client_id);
 document.getElementById('client_id').value = client_id ;
+document.getElementById('api').value = api ;
+document.getElementById('desc').value = desc ;
 
 
 function startTimer() {
