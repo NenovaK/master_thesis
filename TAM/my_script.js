@@ -1,5 +1,5 @@
 document.getElementById('timer').innerHTML =
-  05 + ":" + 00;
+  03 + ":" + 00;
 startTimer();
 
 var url_string = window.location.href;

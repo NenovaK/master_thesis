@@ -12,7 +12,7 @@ form
     background-color: #f2f2f2;
     padding: 20px;
 }
-input[type=submit] {
+input[type=submit]:enabled {
     width: 50%;
     margin: auto; 
     background-color: #4CAF50;
@@ -23,6 +23,11 @@ input[type=submit] {
     cursor: pointer;
 }
 
+input[type=submit]:disabled{
+ 	width: 50%;
+	background-color: #dddddd;
+}
+
 .likert li {
   float: left;
   list-style-type: none;
@@ -31,6 +36,8 @@ input[type=submit] {
 </style>
 </head>
 <body>
+<div>Time left = <span id="timer"></span>
+ 	</div>
     <div class="Container">
         <div class="Content">
         	<form id="myForm" action="submit.php" method = "post">
@@ -180,22 +187,11 @@ input[type=submit] {
   					<li> Totally disagree </li>
 				</ul> 
 				<br> <br>  <br>
-  				<input type="submit" name="sub" id="sub" value="Submit answers">
+  						<input type="submit" name="sub" id="sub" value="Submit answers">
 			</form>
         </div>
     </div>
-    <span id="result"></span>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="my_script.js" type="text/javascript"></script>
 </body>
 </html>
-
-<!--o	Where can you access the API? 
-o	What is the current version of the API?
-o	Where can you find the terms of the service?
-o	Where can you find the contact information of the developer?
-o	How many resources are there? Which HTTP methods are allowed?
-o	Which security schema does the API use? 
-o	Which request should you send in order to get status of a particular flight? What should the request data input contain?
-o	Which request should you send in order to get one specific airport? What parameters does an Airport Object has?  
--->
