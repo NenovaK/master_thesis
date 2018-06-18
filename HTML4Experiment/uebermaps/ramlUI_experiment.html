@@ -99,7 +99,8 @@ input[type=submit]:disabled{
                 <div class="RightContent">
                     <form id="myForm" action="submit.php" method = "post">
                        	<input type="radio" name="api" value="UBM" checked style="visibility: hidden">
-                     	<input type="radio" name="desc" value="RUI" checked style="visibility: hidden"> <br>
+                     	<input type="radio" name="desc" value="RUI" checked style="visibility: hidden">
+                     	<input type="text" id="client_id" name="client_id" style="visibility: hidden">  <br>
 						<label for="accessAPI">Where can you access the API?</label>
     					<input type="text" id="accessAPI" name="accessAPI">
     					  						<br><br>
@@ -147,7 +148,7 @@ input[type=submit]:disabled{
     					<textarea id="req3" name="req3" style="height:100px"></textarea>
     					<textarea id="req4" name="req4" style="visibility: hidden"></textarea>			  						
     					<br><br>
-  						<input type="submit" name="submit" value="Submit answers">
+  						<input type="submit" name="sub" id="sub" value="Submit answers">
 					</form>
                 </div>
                 <div class="LeftContent">
