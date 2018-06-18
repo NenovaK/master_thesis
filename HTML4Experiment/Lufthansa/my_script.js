@@ -8,6 +8,8 @@ var client_id = url.searchParams.get("client_id");
 console.log(client_id);
 document.getElementById('client_id').value = client_id ;
 
+document.getElementById('result').style = "visibility: hidden";
+
 
 function startTimer() {
   var presentTime = document.getElementById('timer').innerHTML;
