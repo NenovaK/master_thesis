@@ -1,5 +1,5 @@
 document.getElementById('timer').innerHTML =
-  01 + ":" + 00;
+  05 + ":" + 00;
 startTimer();
 
 var url_string = window.location.href;
@@ -15,7 +15,8 @@ function startTimer() {
   var m = timeArray[0];
   var s = checkSecond((timeArray[1] - 1));
   if(s==59){m=m-1}
-  if(m<0){disableButton() //NOT WORKING !!!
+  if(m==0 && s==00){
+  	document.getElementById('sub').click();
 }
   
   document.getElementById('timer').innerHTML =
@@ -41,7 +42,3 @@ $("#myForm").one('submit', function() {
   });
   return false;	
 });
-
-function disableButton(){
-	(this).find('input[type="submit"]').attr('disabled','disabled')
-}
