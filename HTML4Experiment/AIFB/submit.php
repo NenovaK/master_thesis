@@ -2,6 +2,9 @@
  		include 'db.php';
  
  		//variables !!!
+ 		#$url = $_SERVER['REMOTE_ADDR'];
+ 		#$url = $_SERVER['HTTP_X_FORWARDED_FOR'];
+ 		$client_id = $_POST['client_id'];
 		$api = $_POST['api'];
 		$desc = $_POST['desc'];
 		$accessAPI = $_POST['accessAPI'];
@@ -20,10 +23,28 @@
 		echo "\n";
 		echo $api, " ", $desc," ", $accessAPI," ", $version," ", $tos," ", $contact," ", $res," ", $meth," ", $sec," ", $req1," ", $req2," ", $req3," ", $req4;
  
-		if(mysqli_query($conn, "INSERT INTO solutions VALUES(NULL, '$api', '$desc', '$accessAPI', '$version', 
+		if(mysqli_query($conn, "INSERT INTO solutions VALUES('$client_id', '$api', '$desc', '$accessAPI', '$version', 
 						'$tos', '$contact', '$res', '$meth', '$sec', '$req1', '$req2', '$req3', '$req4')")) //the values!!! 
 						// TODO !!! Solution for UserID !!! 
 		  echo "Successfully Inserted";
 		else
 		  echo "Insertion Failed";
+		  
+		  
+function getRealIpAddr()
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+    {
+      $ip=$_SERVER['HTTP_CLIENT_IP'];
+    }
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+    {
+      $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    else
+    {
+      $ip=$_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
+}
 ?>

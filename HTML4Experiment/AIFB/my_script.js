@@ -2,6 +2,13 @@ document.getElementById('timer').innerHTML =
   01 + ":" + 00;
 startTimer();
 
+var url_string = window.location.href;
+var url = new URL(url_string);
+var client_id = url.searchParams.get("client_id");
+console.log(client_id);
+document.getElementById('client_id').value = client_id ;
+
+
 function startTimer() {
   var presentTime = document.getElementById('timer').innerHTML;
   var timeArray = presentTime.split(/[:]+/);
