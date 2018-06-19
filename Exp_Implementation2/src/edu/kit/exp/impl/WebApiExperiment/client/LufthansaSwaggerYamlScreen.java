@@ -53,7 +53,7 @@ public class LufthansaSwaggerYamlScreen extends Screen {
 
 		/* Load initial web page */
 		//browser.loadURL("www.iism.kit.edu/im");
-		browser.loadURL(ExperimentConfiguration.lufthansa_swaggeryaml);	
+		browser.loadURL(ExperimentConfiguration.lufthansa_swaggeryaml + "?client_id" + this.guiController.getClientId());	
 			
 		/*
 		 * Send client respone to end the experiment after a certain amount of

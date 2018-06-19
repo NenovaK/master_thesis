@@ -53,7 +53,7 @@ public class WorldMusicApiRamlYamlBrowserScreen extends Screen {
 
 		/* Load initial web page */
 		//browser.loadURL("www.iism.kit.edu/im");
-		browser.loadURL(ExperimentConfiguration.worldmusicapi_ramlyaml);	
+		browser.loadURL(ExperimentConfiguration.worldmusicapi_ramlyaml + "?client_id" + this.guiController.getClientId());	
 			
 		/*
 		 * Send client respone to end the experiment after a certain amount of
