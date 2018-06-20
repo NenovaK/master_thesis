@@ -18,7 +18,7 @@ import java.rmi.RemoteException;
 public class UeberMapsBlueprintFeelScreen extends Screen {
 
 	/** duration of the screen shown in milliseconds */
-	private static final int DURATION_OF_SCREEN = ExperimentConfiguration.screenduration_feel;
+	private static final int DURATION_OF_SCREEN = ExperimentConfiguration.screenduration;
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5532903241165693886L;
 
@@ -53,7 +53,7 @@ public class UeberMapsBlueprintFeelScreen extends Screen {
 
 		/* Load initial web page */
 		//browser.loadURL("www.iism.kit.edu/im");
-		browser.loadURL(ExperimentConfiguration.uebermaps_blueprint_feel + "&client_id=" + this.guiController.getClientId());
+		browser.loadURL(ExperimentConfiguration.uebermaps_blueprint_feel + "&client_id=" + this.guiController.getClientId());	
 			
 		/*
 		 * Send client respone to end the experiment after a certain amount of
