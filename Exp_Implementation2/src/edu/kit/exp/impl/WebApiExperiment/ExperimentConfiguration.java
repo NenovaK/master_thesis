@@ -2,6 +2,9 @@ package edu.kit.exp.impl.WebApiExperiment;
 
 public class ExperimentConfiguration {
 
+	// Walkaround for the problem with the initial screen. 
+	public static final int startduration = 0;
+
 	// 5 minutes plus 2 seconds
 	public static final int screenduration = 5*60*1000/30 + 2*1000;
 
