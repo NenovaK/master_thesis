@@ -43,6 +43,7 @@ import edu.kit.exp.impl.WebApiExperiment.client.AifbSwaggerJsonBrowserScreen;
 import edu.kit.exp.impl.WebApiExperiment.client.AifbSwaggerJsonFeelScreen;
 import edu.kit.exp.impl.WebApiExperiment.client.AifbSwaggerUiBrowserScreen;
 import edu.kit.exp.impl.WebApiExperiment.client.AifbSwaggerUiFeelScreen;
+import edu.kit.exp.impl.WebApiExperiment.client.GeneralInformationScreen;
 import edu.kit.exp.impl.WebApiExperiment.client.InitialScreen;
 import edu.kit.exp.impl.WebApiExperiment.client.LufthansaAmfFeelScreen;
 import edu.kit.exp.impl.WebApiExperiment.client.LufthansaAmfScreen;
@@ -244,6 +245,10 @@ public class WebApiExperimentInstitution extends Institution<WebApiExperimentEnv
 		case 12:
 			// fourth is always AMF Feel
 			showScreen(msg.getClientId(), AifbAmfFeelScreen.class, parameter);
+			break;
+		case 13:
+			// fourth is always AMF Feel
+			showScreen(msg.getClientId(), GeneralInformationScreen.class, parameter);
 
 			// end
 			endPeriod();
@@ -311,6 +316,10 @@ public class WebApiExperimentInstitution extends Institution<WebApiExperimentEnv
 		case 12:
 			// fourth is always AMF Feel
 			showScreen(msg.getClientId(), LufthansaAmfFeelScreen.class, parameter);
+			break;
+		case 13:
+			// fourth is always AMF Feel
+			showScreen(msg.getClientId(), GeneralInformationScreen.class, parameter);
 			
 			// end
 			endPeriod();
@@ -378,6 +387,10 @@ public class WebApiExperimentInstitution extends Institution<WebApiExperimentEnv
 		case 12:
 			// fourth is always AMF Feel
 			showScreen(msg.getClientId(), WordAssocNetworkAmfFeelScreen.class, parameter);
+			break;
+		case 13:
+			// fourth is always AMF Feel
+			showScreen(msg.getClientId(), GeneralInformationScreen.class, parameter);
 			
 			// end
 			endPeriod();
@@ -440,6 +453,10 @@ public class WebApiExperimentInstitution extends Institution<WebApiExperimentEnv
 		case 12:
 			// fourth is always AMF Feel
 			showScreen(msg.getClientId(), UeberMapsAmfFeelScreen.class, parameter);
+			break;
+		case 13:
+			// fourth is always AMF Feel
+			showScreen(msg.getClientId(), GeneralInformationScreen.class, parameter);
 			
 			// end
 			endPeriod();
@@ -506,6 +523,10 @@ public class WebApiExperimentInstitution extends Institution<WebApiExperimentEnv
 		case 12:
 			// fourth is always AMF Feel
 			showScreen(msg.getClientId(), MobileOrderApiAmfFeelScreen.class, parameter);
+			break;
+		case 13:
+			// fourth is always AMF Feel
+			showScreen(msg.getClientId(), GeneralInformationScreen.class, parameter);
 			
 			// end
 			endPeriod();
@@ -573,6 +594,10 @@ public class WebApiExperimentInstitution extends Institution<WebApiExperimentEnv
 		case 12:
 			// fourth is always AMF Feel
 			showScreen(msg.getClientId(), WorldMusicApiAmfFeelScreen.class, parameter);
+			break;
+		case 13:
+			// fourth is always AMF Feel
+			showScreen(msg.getClientId(), GeneralInformationScreen.class, parameter);
 			
 			// end
 			endPeriod();

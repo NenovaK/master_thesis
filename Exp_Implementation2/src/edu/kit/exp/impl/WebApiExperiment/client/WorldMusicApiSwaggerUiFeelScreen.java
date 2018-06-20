@@ -18,7 +18,7 @@ import java.rmi.RemoteException;
 public class WorldMusicApiSwaggerUiFeelScreen extends Screen {
 
 	/** duration of the screen shown in milliseconds */
-	private static final int DURATION_OF_SCREEN = ExperimentConfiguration.screenduration;
+	private static final int DURATION_OF_SCREEN = ExperimentConfiguration.screenduration_feel;
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5532903241165693886L;
 
